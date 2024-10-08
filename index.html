@@ -10,10 +10,7 @@
 
    <script>
     window.addEventListener('message', function(event) {
-        // Validate the origin of the message if needed
-        // if (event.origin !== 'https://your-iframe-origin.com') return;
-
-        // Log the message to see what is being received
+        // Log the received message to see what is being received
         console.log('Received message:', event.data);
         
         // Parse the message to get the resource name and status
@@ -33,9 +30,11 @@
             if (resourceStatus === 'Working') {
                 // Show options for Junior Piercer
                 console.log('Showing options for Junior Piercer');
+                // Logic to show options for Junior Piercer
             } else {
                 // Hide options for Junior Piercer
                 console.log('Hiding options for Junior Piercer');
+                // Logic to hide options for Junior Piercer
             }
         } else if (resourceName.includes('Sairuh')) {
             // Update Piercer status
@@ -43,9 +42,12 @@
             if (resourceStatus === 'Working') {
                 // Show options for Piercer
                 console.log('Showing options for Piercer');
+                // Logic to show options for Piercer
             } else {
                 // Hide options for Piercer
                 console.log('Hiding options for Piercer');
+                console.log('Hiding options for Piercer');
+                // Logic to hide options for Piercer
             }
         }
     });
