@@ -16,43 +16,50 @@
         window.onload = function() {
             console.log("Document loaded. Checking field elements.");
 
+        
             // Get the field elements using their names
             juniorPiercerField = document.querySelector('input[name="q81_juniorpiercerstatus"]');
-            piercerField = document.querySelector('input[name="q80_piercerstatus"]'); // Adjust if needed
+            piercerField = document.querySelector('input[name="q80_piercerstatus"]');
+
 
             console.log("Junior Piercer Field:", juniorPiercerField);
             console.log("Piercer Field:", piercerField);
         };
 
         window.addEventListener("message", function(event) {
-            console.log("Received message:", event.data);
-            
-            // Assuming your message format is correct
-            const parsedData = event.data.split(':');
-            
-            if (parsedData.length === 3) { // Changed to 3
-                const fieldType = parsedData[0];
-                const resourceName = parsedData[1];
-                const resourceStatus = parsedData[2];
+    console.log("Received message:", event.data);
+    
+    // Check for height messages and ignore them
+    if (event.data.startsWith("setHeight:")) {
+        return; // Ignore height messages
+    }
 
-                // Update fields based on the resource status
-                if (fieldType === "piercerstatus") {
-                    if (piercerField) {
-                        piercerField.value = `${resourceName}: ${resourceStatus}`;
-                        console.log(`Updated Piercer Field: ${resourceName} - ${resourceStatus}`);
-                    }
-                } else if (fieldType === "juniorpiercerstatus") {
-                    if (juniorPiercerField) {
-                        juniorPiercerField.value = `${resourceName}: ${resourceStatus}`;
-                        console.log(`Updated Junior Piercer Field: ${resourceName} - ${resourceStatus}`);
-                    }
-                } else {
-                    console.warn(`Field element not found for name: ${fieldType}`);
-                }
-            } else {
-                console.warn(`Received message format is incorrect: ${parsedData}`);
+    const parsedData = event.data.split(':');
+    
+    if (parsedData.length === 3) { // Expecting three parts
+        const fieldType = parsedData[0];
+        const resourceName = parsedData[1];
+        const resourceStatus = parsedData[2];
+
+        // Update fields based on the resource status
+        if (fieldType === "piercerstatus") {
+            if (piercerField) {
+                piercerField.value = `${resourceName}: ${resourceStatus}`;
+                console.log(`Updated Piercer Field: ${resourceName} - ${resourceStatus}`);
             }
-        });
+        } else if (fieldType === "juniorpiercerstatus") {
+            if (juniorPiercerField) {
+                juniorPiercerField.value = `${resourceName}: ${resourceStatus}`;
+                console.log(`Updated Junior Piercer Field: ${resourceName} - ${resourceStatus}`);
+            }
+        } else {
+            console.warn(`Field element not found for name: ${fieldType}`);
+        }
+    } else {
+        console.warn(`Received message format is incorrect: ${parsedData}`);
+    }
+});
+
     </script>
 </body>
 </html>
