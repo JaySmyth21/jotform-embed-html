@@ -10,46 +10,35 @@
     <!-- Embed your JotForm here -->
     <iframe src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
 <script>
-    // **Listen for messages from the iframe**
-window.addEventListener('message', function(event) {
-    window.addEventListener('message', function(event) {
-    // Ensure the message comes from your iframe
-    if (event.origin !== "https://your-iframe-origin.com") return; // Replace with your actual iframe origin
+  window.addEventListener("message", function(event) {
+    console.log("Received message:", event.data); // Log the entire message received
 
-    const message = event.data;
-    const parsedData = message.split(':');
+    // Split the incoming message
+    const parsedData = event.data.split(": ");
+    console.log("Parsed data:", parsedData); // Log the parsed data
 
     if (parsedData.length === 3) {
-        const resourceName = parsedData[1].trim();
-        const resourceStatus = parsedData[2].trim();
+        const fieldName = parsedData[0]; // Get the field name
+        const resourceName = parsedData[1]; // Get the resource name
+        const resourceStatus = parsedData[2]; // Get the resource status
 
-        console.log(`Resource Name: ${resourceName}, Resource Status: ${resourceStatus}`);
+        console.log(`Resource Name: ${resourceName}, Resource Status: ${resourceStatus}`); // Log resource details
 
-        // Update fields based on resource name
-        if (resourceName.includes("Sairuh")) {
-            // Select the Piercer status field by unique name
-            const piercerField = document.querySelector('[name="piercerstatus"]');
-            if (piercerField) {
-                piercerField.value = resourceStatus; // Update the field value
-                console.log('Piercer status updated to:', resourceStatus);
-            } else {
-                console.error('Piercer status field not found');
-            }
-        } else if (resourceName.includes("Jennica")) {
-            // Select the Junior Piercer status field by unique name
-            const juniorPiercerField = document.querySelector('[name="juniorpiercerstatus"]');
-            if (juniorPiercerField) {
-                juniorPiercerField.value = resourceStatus; // Update the field value
-                console.log('Junior Piercer status updated to:', resourceStatus);
-            } else {
-                console.error('Junior Piercer status field not found');
-            }
+        // Select the appropriate field based on the unique name
+        const fieldElement = document.querySelector(`[name="${fieldName}"]`);
+        console.log(`Field element found:`, fieldElement); // Log the field element
+
+        if (fieldElement) {
+            // Update the field's value
+            fieldElement.value = resourceStatus; // Set the status in the field
+            console.log(`Updated ${fieldName} field with status: ${resourceStatus}`); // Log the update
         } else {
-            console.error(`Unknown resource name: ${resourceName}`);
+            console.error(`Field element not found for name: ${fieldName}`); // Log if the field is not found
         }
+    } else {
+        console.error("Received message format is incorrect:", parsedData); // Log if the format is incorrect
     }
 });
-
 
 
 </script>
