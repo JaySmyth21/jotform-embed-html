@@ -46,14 +46,18 @@
             if (piercerField) {
                 piercerField.value = `${resourceName}: ${resourceStatus}`;
                 console.log(`Updated Piercer Field: ${resourceName} - ${resourceStatus}`);
+            } else {
+                console.warn("Piercer Field not found.");
             }
         } else if (fieldType === "juniorpiercerstatus") {
             if (juniorPiercerField) {
                 juniorPiercerField.value = `${resourceName}: ${resourceStatus}`;
                 console.log(`Updated Junior Piercer Field: ${resourceName} - ${resourceStatus}`);
+            } else {
+                console.warn("Junior Piercer Field not found.");
             }
         } else {
-            console.warn(`Field element not found for name: ${fieldType}`);
+            console.warn(`Unknown field type: ${fieldType}`);
         }
     } else {
         console.warn(`Received message format is incorrect: ${parsedData}`);
