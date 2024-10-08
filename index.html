@@ -10,21 +10,7 @@
     <!-- Embed your JotForm here -->
     <iframe src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
 <script>
-    window.onload = function() {
-    // Add your existing listener setup code here
-    console.log("Document loaded. Checking field elements.");
-
-    const juniorPiercerField = document.querySelector(`[name="q81_juniorpiercerstatus"]`);
-    const piercerField = document.querySelector(`[name="q80_piercerstatus"]`);
-
-    console.log("Junior Piercer Field:", juniorPiercerField);
-    console.log("Piercer Field:", piercerField);
-    
-    window.addEventListener("message", function(event) {
-        console.log("Received message:", event.data);
-        // Your existing message handling code...
-    });
-};
+   
 
  window.addEventListener("message", function(event) {
     console.log("Received message:", event.data); // Log the entire message received
