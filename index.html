@@ -3,34 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your JotForm</title>
-    <style>
-        /* Add any custom styling if needed */
-    </style>
+    <title>Your JotForm with Dynamic Logic</title>
 </head>
 <body>
     <h1>Your JotForm</h1>
-    <!-- Replace 'YOUR_JOTFORM_URL' with your actual JotForm embed link -->
+    <!-- Embed your JotForm here -->
     <iframe src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
 
     <script>
-        // Listen for messages from the iframe
         window.addEventListener('message', function(event) {
-            // Ensure the message is from the expected origin
-            // For example, if your iframe is from 'https://your-iframe-origin.com'
-            if (event.origin !== 'https://your-iframe-origin.com') return;
+            // Validate the origin of the message if needed
+            // if (event.origin !== 'https://your-iframe-origin.com') return;
 
-            const data = event.data; // Assuming data is in the format "Name: Status"
-            // Split the data if necessary (you may need to adjust based on your message structure)
-            const parts = data.split(':');
-            const resourceName = parts[0].trim();
-            const resourceStatus = parts[1].trim();
+            // Parse the message to get the resource name and status
+            const data = event.data.split(':');
+            const resourceName = data[0].trim();
+            const resourceStatus = data[1].trim();
 
-            // Now target the input fields directly using their IDs
+            // Logic to show/hide options based on resource status
+            const juniorPiercerField = document.getElementById('input_81'); // Adjust these IDs accordingly
+            const piercerField = document.getElementById('input_80'); // Adjust these IDs accordingly
+
             if (resourceName.includes('Jennica')) {
-                document.getElementById('input_81').value = resourceStatus; // Set the status for Junior Piercer
+                // Update Junior Piercer status
+                juniorPiercerField.value = resourceStatus; // Populate status if needed
+                if (resourceStatus === 'Working') {
+                    // Show options for Junior Piercer
+                    // You may need to use JotForm API for this if hiding/showing options is required
+                } else {
+                    // Hide options for Junior Piercer
+                }
             } else if (resourceName.includes('Sairuh')) {
-                document.getElementById('input_80').value = resourceStatus; // Set the status for Piercer
+                // Update Piercer status
+                piercerField.value = resourceStatus; // Populate status if needed
+                if (resourceStatus === 'Working') {
+                    // Show options for Piercer
+                } else {
+                    // Hide options for Piercer
+                }
             }
         });
     </script>
