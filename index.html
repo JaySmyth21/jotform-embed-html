@@ -25,20 +25,21 @@
     console.log("Parsed data:", parsedData); // Log the parsed data
 
     // Continue with the existing logic for resource status messages
-    if (parsedData.length === 3) {
-        const fieldName = parsedData[0]; // Get the field name
-        const resourceName = parsedData[1].trim(); // Get the resource name and trim whitespace
-        const resourceStatus = parsedData[2].trim(); // Get the resource status and trim whitespace
+    if (parsedData.length === 4) {
+        const fieldPrefix = parsedData[0]; // Get the unique name (e.g., "piercerstatus")
+        const fieldName = parsedData[1]; // Get the field name (e.g., "Piercer")
+        const resourceName = parsedData[2].trim(); // Get the resource name and trim whitespace
+        const resourceStatus = parsedData[3].trim(); // Get the resource status and trim whitespace
 
         console.log(`Resource Name: ${resourceName}, Resource Status: ${resourceStatus}`); // Log resource details
 
         // Select the appropriate field based on the prefixed unique name
         let fieldElement;
 
-        if (fieldName === "Junior Piercer") {
+        if (fieldPrefix === "juniorpiercerstatus") {
             fieldElement = document.querySelector(`[name="q81_juniorpiercerstatus"]`);
             console.log("Trying to find Junior Piercer field:", fieldElement);
-        } else if (fieldName === "Piercer") {
+        } else if (fieldPrefix === "piercerstatus") {
             fieldElement = document.querySelector(`[name="q80_piercerstatus"]`);
             console.log("Trying to find Piercer field:", fieldElement);
         }
