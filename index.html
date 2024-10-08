@@ -10,13 +10,21 @@
     <!-- Embed your JotForm here -->
     <iframe src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
 <script>
-  window.addEventListener("message", function(event) {
+ window.addEventListener("message", function(event) {
     console.log("Received message:", event.data); // Log the entire message received
 
-    // Split the incoming message
+    // Split the incoming message based on ": " to separate the different components
     const parsedData = event.data.split(": ");
+
+    // Check if it's a height message
+    if (parsedData[0] === "setHeight") {
+        console.log("Height message received:", parsedData);
+        return; // Exit the function early for height messages
+    }
+
     console.log("Parsed data:", parsedData); // Log the parsed data
 
+    // Continue with the existing logic for resource status messages
     if (parsedData.length === 3) {
         const fieldName = parsedData[0]; // Get the field name
         const resourceName = parsedData[1]; // Get the resource name
@@ -24,8 +32,15 @@
 
         console.log(`Resource Name: ${resourceName}, Resource Status: ${resourceStatus}`); // Log resource details
 
-        // Select the appropriate field based on the unique name
-        const fieldElement = document.querySelector(`[name="${fieldName}"]`);
+        // Select the appropriate field based on the prefixed unique name
+        let fieldElement;
+
+        if (fieldName === "Junior Piercer") {
+            fieldElement = document.querySelector(`[name="q81_juniorpiercerstatus"]`);
+        } else if (fieldName === "Piercer") {
+            fieldElement = document.querySelector(`[name="q80_piercerstatus"]`);
+        }
+
         console.log(`Field element found:`, fieldElement); // Log the field element
 
         if (fieldElement) {
@@ -39,6 +54,7 @@
         console.error("Received message format is incorrect:", parsedData); // Log if the format is incorrect
     }
 });
+
 
 
 </script>
