@@ -17,25 +17,27 @@ window.addEventListener('message', function(event) {
 
     const message = event.data;
     const parsedData = message.split(':');
-    
+
     if (parsedData.length === 3) {
         const resourceName = parsedData[1].trim();
         const resourceStatus = parsedData[2].trim();
 
         console.log(`Resource Name: ${resourceName}, Resource Status: ${resourceStatus}`);
 
-        // Check which resource is being updated
-        if (resourceName === "Sairuh") {
+        // Update fields based on resource name
+        if (resourceName.includes("Sairuh")) {
             const piercerField = document.getElementById('input_80'); // Piercer status
             if (piercerField) {
                 piercerField.value = resourceStatus; // Update the field value
+                console.log('Piercer status updated to:', resourceStatus);
             } else {
                 console.error('Piercer status field not found');
             }
-        } else if (resourceName === "Jennica") {
+        } else if (resourceName.includes("Jennica")) {
             const juniorPiercerField = document.getElementById('input_81'); // Junior Piercer status
             if (juniorPiercerField) {
                 juniorPiercerField.value = resourceStatus; // Update the field value
+                console.log('Junior Piercer status updated to:', resourceStatus);
             } else {
                 console.error('Junior Piercer status field not found');
             }
@@ -44,6 +46,7 @@ window.addEventListener('message', function(event) {
         }
     }
 });
+
 
 </script>
 </body>
