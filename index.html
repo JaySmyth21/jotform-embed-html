@@ -9,52 +9,50 @@
     <h1>Your JotForm</h1>
     <!-- Embed your JotForm here -->
     <iframe src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
-<script>
-   
+    <script>
+        let juniorPiercerField;
+        let piercerField;
 
- window.addEventListener("message", function(event) {
-    console.log("Received message:", event.data);
-    
-    // Assuming your message format is correct
-    const parsedData = event.data.split(':');
-    
-    if (parsedData.length === 4) {
-        const fieldType = parsedData[0];
-        const resourceName = parsedData[1];
-        const resourceStatus = parsedData[2];
+        window.onload = function() {
+            console.log("Document loaded. Checking field elements.");
 
-        // Update fields based on the resource status
-        if (fieldType === "piercerstatus") {
-            if (piercerField) {
-                piercerField.value = `${resourceName}: ${resourceStatus}`;
-                console.log(`Updated Piercer Field: ${resourceName} - ${resourceStatus}`);
+            // Get the field elements using their names
+            juniorPiercerField = document.querySelector('input[name="q81_juniorpiercerstatus"]');
+            piercerField = document.querySelector('input[name="q80_piercerstatus"]'); // Adjust if needed
+
+            console.log("Junior Piercer Field:", juniorPiercerField);
+            console.log("Piercer Field:", piercerField);
+        };
+
+        window.addEventListener("message", function(event) {
+            console.log("Received message:", event.data);
+            
+            // Assuming your message format is correct
+            const parsedData = event.data.split(':');
+            
+            if (parsedData.length === 3) { // Changed to 3
+                const fieldType = parsedData[0];
+                const resourceName = parsedData[1];
+                const resourceStatus = parsedData[2];
+
+                // Update fields based on the resource status
+                if (fieldType === "piercerstatus") {
+                    if (piercerField) {
+                        piercerField.value = `${resourceName}: ${resourceStatus}`;
+                        console.log(`Updated Piercer Field: ${resourceName} - ${resourceStatus}`);
+                    }
+                } else if (fieldType === "juniorpiercerstatus") {
+                    if (juniorPiercerField) {
+                        juniorPiercerField.value = `${resourceName}: ${resourceStatus}`;
+                        console.log(`Updated Junior Piercer Field: ${resourceName} - ${resourceStatus}`);
+                    }
+                } else {
+                    console.warn(`Field element not found for name: ${fieldType}`);
+                }
+            } else {
+                console.warn(`Received message format is incorrect: ${parsedData}`);
             }
-        } else if (fieldType === "juniorpiercerstatus") {
-            if (juniorPiercerField) {
-                juniorPiercerField.value = `${resourceName}: ${resourceStatus}`;
-                console.log(`Updated Junior Piercer Field: ${resourceName} - ${resourceStatus}`);
-            }
-        } else {
-            console.warn(`Field element not found for name: ${fieldType}`);
-        }
-    } else {
-        console.warn(`Received message format is incorrect: ${parsedData}`);
-    }
-});
-
-// This function will run when the window is fully loaded
-window.onload = function() {
-    console.log("Document loaded. Checking field elements.");
-
-    // Get the field elements using their names
-    const juniorPiercerField = document.querySelector('input[name="q81_juniorpiercerstatus"]');
-    const piercerField = document.querySelector('input[name="q80_piercerstatus"]'); // Adjust if needed
-
-    console.log("Junior Piercer Field:", juniorPiercerField);
-    console.log("Piercer Field:", piercerField);
-};
-
-
-</script>
+        });
+    </script>
 </body>
 </html>
