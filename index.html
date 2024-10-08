@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your JotForm</title>
+    <style>
+        /* Add any custom styling if needed */
+    </style>
+</head>
+<body>
+    <h1>Your JotForm</h1>
+    <!-- Replace 'YOUR_JOTFORM_URL' with your actual JotForm embed link -->
+    <iframe src="YOUR_JOTFORM_URL" style="width:100%; height:600px;" frameborder="0"></iframe>
+
+    <script>
+        // Listen for messages from the iframe
+        window.addEventListener('message', function(event) {
+            // Ensure the message is from the expected origin
+            // For example, if your iframe is from 'https://your-iframe-origin.com'
+            if (event.origin !== 'https://your-iframe-origin.com') return;
+
+            const data = event.data; // Assuming data is in the format "Name: Status"
+            // Split the data if necessary (you may need to adjust based on your message structure)
+            const parts = data.split(':');
+            const resourceName = parts[0].trim();
+            const resourceStatus = parts[1].trim();
+
+            // Now target the input fields directly using their IDs
+            if (resourceName.includes('Jennica')) {
+                document.getElementById('input_81').value = resourceStatus; // Set the status for Junior Piercer
+            } else if (resourceName.includes('Sairuh')) {
+                document.getElementById('input_80').value = resourceStatus; // Set the status for Piercer
+            }
+        });
+    </script>
+</body>
+</html>
