@@ -12,6 +12,7 @@
 <script>
     // **Listen for messages from the iframe**
 window.addEventListener('message', function(event) {
+    window.addEventListener('message', function(event) {
     // Ensure the message comes from your iframe
     if (event.origin !== "https://your-iframe-origin.com") return; // Replace with your actual iframe origin
 
@@ -26,7 +27,8 @@ window.addEventListener('message', function(event) {
 
         // Update fields based on resource name
         if (resourceName.includes("Sairuh")) {
-            const piercerField = document.getElementById('input_80'); // Piercer status
+            // Select the Piercer status field by unique name
+            const piercerField = document.querySelector('[name="piercerstatus"]');
             if (piercerField) {
                 piercerField.value = resourceStatus; // Update the field value
                 console.log('Piercer status updated to:', resourceStatus);
@@ -34,7 +36,8 @@ window.addEventListener('message', function(event) {
                 console.error('Piercer status field not found');
             }
         } else if (resourceName.includes("Jennica")) {
-            const juniorPiercerField = document.getElementById('input_81'); // Junior Piercer status
+            // Select the Junior Piercer status field by unique name
+            const juniorPiercerField = document.querySelector('[name="juniorpiercerstatus"]');
             if (juniorPiercerField) {
                 juniorPiercerField.value = resourceStatus; // Update the field value
                 console.log('Junior Piercer status updated to:', resourceStatus);
@@ -46,6 +49,7 @@ window.addEventListener('message', function(event) {
         }
     }
 });
+
 
 
 </script>
