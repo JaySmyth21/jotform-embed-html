@@ -10,73 +10,38 @@
     <!-- Embed your JotForm here -->
     <iframe src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
 <script>
-    console.log(document.body.innerHTML); // Add this line to inspect the entire form structure
+    // **Listen for messages from the iframe**
+window.addEventListener('message', function(event) {
+    // Ensure the message comes from your iframe
+    if (event.origin !== "https://your-iframe-origin.com") return; // Replace with your actual iframe origin
 
-   window.addEventListener('message', function(event) {
-    // Log the received message to see what is being received
-    console.log('Received message:', event.data);
+    const message = event.data;
+    const parsedData = message.split(':');
+    
+    if (parsedData.length === 3) {
+        const resourceName = parsedData[1].trim();
+        const resourceStatus = parsedData[2].trim();
 
-    // Check if the message is from the expected source (optional but recommended)
-    // if (event.origin !== 'YOUR_EXPECTED_ORIGIN') return; // Uncomment and set your expected origin
+        console.log(`Resource Name: ${resourceName}, Resource Status: ${resourceStatus}`);
 
-    // Only proceed if the message starts with "Piercer" to filter out unwanted messages
-    if (!event.data.startsWith('Piercer')) {
-        console.log('Ignoring irrelevant message:', event.data);
-        return; // Ignore unrelated messages
-    }
-
-    // Parse the message to get the resource name and status
-    const data = event.data.split(':');
-    console.log('Parsed data:', data); // Log the parsed data
-
-    if (data.length !== 3) {
-        console.error('Received unexpected message format:', event.data);
-        return; // Ensure the message is properly formatted
-    }
-
-    const resourceName = data[1].trim(); // Get resource name
-    const resourceStatus = data[2].trim(); // Get resource status
-
-    // Log the resource name and status
-    console.log(`Resource Name: ${resourceName}, Resource Status: ${resourceStatus}`);
-
-    // Logic to show/hide options based on resource status
-    const juniorPiercerField = document.getElementById('input_81'); // Adjust these IDs accordingly
-    const piercerField = document.getElementById('input_80'); // Adjust these IDs accordingly
-
-    // Check if fields exist to avoid TypeErrors
-    if (!juniorPiercerField || !piercerField) {
-        console.error('Field elements not found in the DOM:', {
-            juniorPiercerField,
-            piercerField
-        });
-        return; // Exit if fields are not found
-    }
-
-    if (resourceName.includes('Jennica')) {
-        console.log('Processing status for Junior Piercer');
-        // Update Junior Piercer status
-        juniorPiercerField.value = resourceStatus; // Populate status if needed
-        if (resourceStatus === 'Working') {
-            console.log('Junior Piercer is Working. Showing options.');
-            juniorPiercerField.style.display = 'block'; // Show options for Junior Piercer
+        // Check which resource is being updated
+        if (resourceName === "Sairuh") {
+            const piercerField = document.getElementById('input_80'); // Piercer status
+            if (piercerField) {
+                piercerField.value = resourceStatus; // Update the field value
+            } else {
+                console.error('Piercer status field not found');
+            }
+        } else if (resourceName === "Jennica") {
+            const juniorPiercerField = document.getElementById('input_81'); // Junior Piercer status
+            if (juniorPiercerField) {
+                juniorPiercerField.value = resourceStatus; // Update the field value
+            } else {
+                console.error('Junior Piercer status field not found');
+            }
         } else {
-            console.log('Junior Piercer is NOT Working. Hiding options.');
-            juniorPiercerField.style.display = 'none'; // Hide options for Junior Piercer
+            console.error(`Unknown resource name: ${resourceName}`);
         }
-    } else if (resourceName.includes('Sairuh')) {
-        console.log('Processing status for Piercer');
-        // Update Piercer status
-        piercerField.value = resourceStatus; // Populate status if needed
-        if (resourceStatus === 'Working') {
-            console.log('Piercer is Working. Showing options.');
-            piercerField.style.display = 'block'; // Show options for Piercer
-        } else {
-            console.log('Piercer is NOT Working. Hiding options.');
-            piercerField.style.display = 'none'; // Hide options for Piercer
-        }
-    } else {
-        console.warn('Unknown resource name:', resourceName);
     }
 });
 
