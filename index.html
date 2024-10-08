@@ -13,50 +13,46 @@
    
 
  window.addEventListener("message", function(event) {
-    console.log("Received message:", event.data); // Log the entire message received
-
-    // Split the incoming message based on ": " to separate the different components
-    const parsedData = event.data.split(": ");
-
-    // Check if it's a height message
-    if (parsedData[0] === "setHeight") {
-        console.log("Height message received:", parsedData);
-        return; // Exit the function early for height messages
-    }
-
-    console.log("Parsed data:", parsedData); // Log the parsed data
-
-    // Continue with the existing logic for resource status messages
+    console.log("Received message:", event.data);
+    
+    // Assuming your message format is correct
+    const parsedData = event.data.split(':');
+    
     if (parsedData.length === 4) {
-        const fieldPrefix = parsedData[0]; // Get the unique name (e.g., "piercerstatus")
-        const fieldName = parsedData[1]; // Get the field name (e.g., "Piercer")
-        const resourceName = parsedData[2].trim(); // Get the resource name and trim whitespace
-        const resourceStatus = parsedData[3].trim(); // Get the resource status and trim whitespace
+        const fieldType = parsedData[0];
+        const resourceName = parsedData[1];
+        const resourceStatus = parsedData[2];
 
-        console.log(`Resource Name: ${resourceName}, Resource Status: ${resourceStatus}`); // Log resource details
-
-        // Select the appropriate field based on the prefixed unique name
-        let fieldElement;
-
-        if (fieldPrefix === "juniorpiercerstatus") {
-            fieldElement = document.querySelector(`[name="q81_juniorpiercerstatus"]`);
-            console.log("Trying to find Junior Piercer field:", fieldElement);
-        } else if (fieldPrefix === "piercerstatus") {
-            fieldElement = document.querySelector(`[name="q80_piercerstatus"]`);
-            console.log("Trying to find Piercer field:", fieldElement);
-        }
-
-        if (fieldElement) {
-            // Update the field's value
-            fieldElement.value = resourceStatus; // Set the status in the field
-            console.log(`Updated ${fieldName} field with status: ${resourceStatus}`); // Log the update
+        // Update fields based on the resource status
+        if (fieldType === "piercerstatus") {
+            if (piercerField) {
+                piercerField.value = `${resourceName}: ${resourceStatus}`;
+                console.log(`Updated Piercer Field: ${resourceName} - ${resourceStatus}`);
+            }
+        } else if (fieldType === "juniorpiercerstatus") {
+            if (juniorPiercerField) {
+                juniorPiercerField.value = `${resourceName}: ${resourceStatus}`;
+                console.log(`Updated Junior Piercer Field: ${resourceName} - ${resourceStatus}`);
+            }
         } else {
-            console.error(`Field element not found for name: ${fieldName}`); // Log if the field is not found
+            console.warn(`Field element not found for name: ${fieldType}`);
         }
     } else {
-        console.error("Received message format is incorrect:", parsedData); // Log if the format is incorrect
+        console.warn(`Received message format is incorrect: ${parsedData}`);
     }
 });
+
+// This function will run when the window is fully loaded
+window.onload = function() {
+    console.log("Document loaded. Checking field elements.");
+
+    // Get the field elements using their names
+    const juniorPiercerField = document.querySelector('input[name="q81_juniorpiercerstatus"]');
+    const piercerField = document.querySelector('input[name="q80_piercerstatus"]'); // Adjust if needed
+
+    console.log("Junior Piercer Field:", juniorPiercerField);
+    console.log("Piercer Field:", piercerField);
+};
 
 
 </script>
