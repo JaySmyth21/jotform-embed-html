@@ -4,6 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piercing Service Form</title>
+    <style>
+        .services-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+
+        .services-column {
+            list-style: none;
+            padding: 0;
+        }
+
+        .services-column label {
+            display: block;
+            margin-bottom: 8px;
+        }
+    </style>
 </head>
 <body>
     <h1>Piercing Service Form</h1>
@@ -22,176 +39,78 @@
         <!-- Checkbox question: Select Service(s) -->
         <fieldset>
             <legend>Select Service(s)</legend>
-            <input type="checkbox" id="angel-fangs" name="services" value="Angel Fangs Piercing">
-            <label for="angel-fangs">Angel Fangs Piercing</label><br>
 
-            <input type="checkbox" id="bridge" name="services" value="Bridge Piercing">
-            <label for="bridge">Bridge Piercing</label><br>
+            <div class="services-container">
 
-            <input type="checkbox" id="cheek-dahlia" name="services" value="Cheek or Dahlia Piercing">
-            <label for="cheek-dahlia">Cheek or Dahlia Piercing</label><br>
+                <!-- Piercings Column -->
+                <ul class="services-column">
+                    <li><input type="checkbox" id="angel-fangs" name="services" value="Angel Fangs Piercing"><label for="angel-fangs">Angel Fangs Piercing</label></li>
+                    <li><input type="checkbox" id="bridge" name="services" value="Bridge Piercing"><label for="bridge">Bridge Piercing</label></li>
+                    <li><input type="checkbox" id="cheek-dahlia" name="services" value="Cheek or Dahlia Piercing"><label for="cheek-dahlia">Cheek or Dahlia Piercing</label></li>
+                    <li><input type="checkbox" id="christina" name="services" value="Christina Piercing"><label for="christina">Christina Piercing</label></li>
+                    <li><input type="checkbox" id="conch" name="services" value="Conch Piercing"><label for="conch">Conch Piercing</label></li>
+                    <li><input type="checkbox" id="daith" name="services" value="Daith Piercing"><label for="daith">Daith Piercing</label></li>
+                    <li><input type="checkbox" id="dermal" name="services" value="Dermal Piercing"><label for="dermal">Dermal Piercing</label></li>
+                    <li><input type="checkbox" id="eyebrow" name="services" value="Eyebrow Piercing"><label for="eyebrow">Eyebrow Piercing</label></li>
+                    <li><input type="checkbox" id="fangs" name="services" value="Fangs Piercing"><label for="fangs">Fangs Piercing</label></li>
+                    <li><input type="checkbox" id="flat" name="services" value="Flat/Scapha Piercing"><label for="flat">Flat/Scapha Piercing</label></li>
+                    <li><input type="checkbox" id="forward-helix" name="services" value="Forward Helix Piercing"><label for="forward-helix">Forward Helix Piercing</label></li>
+                    <li><input type="checkbox" id="helix" name="services" value="Helix Piercing"><label for="helix">Helix Piercing</label></li>
+                    <li><input type="checkbox" id="hidden-helix" name="services" value="Hidden Helix Piercing"><label for="hidden-helix">Hidden Helix Piercing</label></li>
+                    <li><input type="checkbox" id="industrial" name="services" value="Industrial Piercing"><label for="industrial">Industrial Piercing</label></li>
+                    <li><input type="checkbox" id="jestrum" name="services" value="Jestrum (Vertical Philtrum) Piercing"><label for="jestrum">Jestrum (Vertical Philtrum) Piercing</label></li>
+                    <li><input type="checkbox" id="labia" name="services" value="Labia Piercing"><label for="labia">Labia Piercing</label></li>
+                    <li><input type="checkbox" id="labret" name="services" value="Labret Piercing"><label for="labret">Labret Piercing</label></li>
+                    <li><input type="checkbox" id="lobe-single" name="services" value="Lobe Piercing (Single)"><label for="lobe-single">Lobe Piercing (Single)</label></li>
+                    <li><input type="checkbox" id="lobe-pair" name="services" value="Lobe Piercing (Pair)"><label for="lobe-pair">Lobe Piercing (Pair)</label></li>
+                    <li><input type="checkbox" id="lobe-child-single" name="services" value="Lobe Piercing Ages 5-12 (Single)"><label for="lobe-child-single">Lobe Piercing Ages 5-12 (Single)</label></li>
+                    <li><input type="checkbox" id="lobe-child-pair" name="services" value="Lobe Piercing Ages 5-12 (Pair)"><label for="lobe-child-pair">Lobe Piercing Ages 5-12 (Pair)</label></li>
+                    <li><input type="checkbox" id="mantis" name="services" value="Mantis (Forward Facing Nostrils) Piercing"><label for="mantis">Mantis (Forward Facing Nostrils) Piercing</label></li>
+                    <li><input type="checkbox" id="monroe" name="services" value="Monroe or Madonna Piercing"><label for="monroe">Monroe or Madonna Piercing</label></li>
+                    <li><input type="checkbox" id="navel" name="services" value="Navel Piercing"><label for="navel">Navel Piercing</label></li>
+                    <li><input type="checkbox" id="nipple-single" name="services" value="Nipple Piercing (Single)"><label for="nipple-single">Nipple Piercing (Single)</label></li>
+                    <li><input type="checkbox" id="nipple-pair" name="services" value="Nipple Piercing (Pair)"><label for="nipple-pair">Nipple Piercing (Pair)</label></li>
+                    <li><input type="checkbox" id="nostril" name="services" value="Nostril Piercing"><label for="nostril">Nostril Piercing</label></li>
+                    <li><input type="checkbox" id="orbital" name="services" value="Orbital Piercing"><label for="orbital">Orbital Piercing</label></li>
+                    <li><input type="checkbox" id="philtrum" name="services" value="Philtrum/Medusa Piercing"><label for="philtrum">Philtrum/Medusa Piercing</label></li>
+                    <li><input type="checkbox" id="rook" name="services" value="Rook Piercing"><label for="rook">Rook Piercing</label></li>
+                    <li><input type="checkbox" id="septum" name="services" value="Septum Piercing"><label for="septum">Septum Piercing</label></li>
+                    <li><input type="checkbox" id="snake-bites" name="services" value="Snake Bites Piercing"><label for="snake-bites">Snake Bites Piercing</label></li>
+                    <li><input type="checkbox" id="tongue" name="services" value="Tongue Piercing"><label for="tongue">Tongue Piercing</label></li>
+                    <li><input type="checkbox" id="tongue-web" name="services" value="Tongue Web Piercing"><label for="tongue-web">Tongue Web Piercing</label></li>
+                    <li><input type="checkbox" id="tragus" name="services" value="Tragus Piercing"><label for="tragus">Tragus Piercing</label></li>
+                    <li><input type="checkbox" id="vch" name="services" value="VCH Piercing"><label for="vch">VCH Piercing</label></li>
+                    <li><input type="checkbox" id="vertical-labret" name="services" value="Vertical Labret Piercing"><label for="vertical-labret">Vertical Labret Piercing</label></li>
+                </ul>
 
-            <input type="checkbox" id="christina" name="services" value="Christina Piercing">
-            <label for="christina">Christina Piercing</label><br>
+                <!-- Jewelry Changes Column -->
+                <ul class="services-column">
+                    <li><input type="checkbox" id="jewelry-one" name="services" value="Jewelry Change (One Change)"><label for="jewelry-one">Jewelry Change (One Change)</label></li>
+                    <li><input type="checkbox" id="jewelry-two" name="services" value="Jewelry Change (Two Changes)"><label for="jewelry-two">Jewelry Change (Two Changes)</label></li>
+                    <li><input type="checkbox" id="jewelry-three" name="services" value="Jewelry Change (Three Changes)"><label for="jewelry-three">Jewelry Change (Three Changes)</label></li>
+                    <li><input type="checkbox" id="jewelry-four" name="services" value="Jewelry Change (Four Changes)"><label for="jewelry-four">Jewelry Change (Four Changes)</label></li>
+                    <li><input type="checkbox" id="jewelry-five" name="services" value="Jewelry Change (Five Changes)"><label for="jewelry-five">Jewelry Change (Five Changes)</label></li>
+                    <li><input type="checkbox" id="jewelry-six" name="services" value="Jewelry Change (Six Changes)"><label for="jewelry-six">Jewelry Change (Six Changes)</label></li>
+                    <li><input type="checkbox" id="jewelry-seven" name="services" value="Jewelry Change (Seven Changes)"><label for="jewelry-seven">Jewelry Change (Seven Changes)</label></li>
+                    <li><input type="checkbox" id="jewelry-eight" name="services" value="Jewelry Change (Eight Changes)"><label for="jewelry-eight">Jewelry Change (Eight Changes)</label></li>
+                </ul>
 
-            <input type="checkbox" id="conch" name="services" value="Conch Piercing">
-            <label for="conch">Conch Piercing</label><br>
-
-            <input type="checkbox" id="daith" name="services" value="Daith Piercing">
-            <label for="daith">Daith Piercing</label><br>
-
-            <input type="checkbox" id="dermal" name="services" value="Dermal Piercing">
-            <label for="dermal">Dermal Piercing</label><br>
-
-            <input type="checkbox" id="eyebrow" name="services" value="Eyebrow Piercing">
-            <label for="eyebrow">Eyebrow Piercing</label><br>
-
-            <input type="checkbox" id="fangs" name="services" value="Fangs Piercing">
-            <label for="fangs">Fangs Piercing</label><br>
-
-            <input type="checkbox" id="flat" name="services" value="Flat/Scapha Piercing">
-            <label for="flat">Flat/Scapha Piercing</label><br>
-
-            <input type="checkbox" id="forward-helix" name="services" value="Forward Helix Piercing">
-            <label for="forward-helix">Forward Helix Piercing</label><br>
-
-            <input type="checkbox" id="helix" name="services" value="Helix Piercing">
-            <label for="helix">Helix Piercing</label><br>
-
-            <input type="checkbox" id="hidden-helix" name="services" value="Hidden Helix Piercing">
-            <label for="hidden-helix">Hidden Helix Piercing</label><br>
-
-            <input type="checkbox" id="industrial" name="services" value="Industrial Piercing">
-            <label for="industrial">Industrial Piercing</label><br>
-
-            <input type="checkbox" id="jestrum" name="services" value="Jestrum (Vertical Philtrum) Piercing">
-            <label for="jestrum">Jestrum (Vertical Philtrum) Piercing</label><br>
-
-            <input type="checkbox" id="labia" name="services" value="Labia Piercing">
-            <label for="labia">Labia Piercing</label><br>
-
-            <input type="checkbox" id="labret" name="services" value="Labret Piercing">
-            <label for="labret">Labret Piercing</label><br>
-
-            <input type="checkbox" id="lobe-single" name="services" value="Lobe Piercing (Single)">
-            <label for="lobe-single">Lobe Piercing (Single)</label><br>
-
-            <input type="checkbox" id="lobe-pair" name="services" value="Lobe Piercing (Pair)">
-            <label for="lobe-pair">Lobe Piercing (Pair)</label><br>
-
-            <input type="checkbox" id="lobe-child-single" name="services" value="Lobe Piercing Ages 5-12 (Single)">
-            <label for="lobe-child-single">Lobe Piercing Ages 5-12 (Single)</label><br>
-
-            <input type="checkbox" id="lobe-child-pair" name="services" value="Lobe Piercing Ages 5-12 (Pair)">
-            <label for="lobe-child-pair">Lobe Piercing Ages 5-12 (Pair)</label><br>
-
-            <input type="checkbox" id="mantis" name="services" value="Mantis (Forward Facing Nostrils) Piercing">
-            <label for="mantis">Mantis (Forward Facing Nostrils) Piercing</label><br>
-
-            <input type="checkbox" id="monroe" name="services" value="Monroe or Madonna Piercing">
-            <label for="monroe">Monroe or Madonna Piercing</label><br>
-
-            <input type="checkbox" id="navel" name="services" value="Navel Piercing">
-            <label for="navel">Navel Piercing</label><br>
-
-            <input type="checkbox" id="nipple-single" name="services" value="Nipple Piercing (Single)">
-            <label for="nipple-single">Nipple Piercing (Single)</label><br>
-
-            <input type="checkbox" id="nipple-pair" name="services" value="Nipple Piercing (Pair)">
-            <label for="nipple-pair">Nipple Piercing (Pair)</label><br>
-
-            <input type="checkbox" id="nostril" name="services" value="Nostril Piercing">
-            <label for="nostril">Nostril Piercing</label><br>
-
-            <input type="checkbox" id="orbital" name="services" value="Orbital Piercing">
-            <label for="orbital">Orbital Piercing</label><br>
-
-            <input type="checkbox" id="philtrum" name="services" value="Philtrum/Medusa Piercing">
-            <label for="philtrum">Philtrum/Medusa Piercing</label><br>
-
-            <input type="checkbox" id="rook" name="services" value="Rook Piercing">
-            <label for="rook">Rook Piercing</label><br>
-
-            <input type="checkbox" id="septum" name="services" value="Septum Piercing">
-            <label for="septum">Septum Piercing</label><br>
-
-            <input type="checkbox" id="snake-bites" name="services" value="Snake Bites Piercing">
-            <label for="snake-bites">Snake Bites Piercing</label><br>
-
-            <input type="checkbox" id="tongue" name="services" value="Tongue Piercing">
-            <label for="tongue">Tongue Piercing</label><br>
-
-            <input type="checkbox" id="tongue-web" name="services" value="Tongue Web Piercing">
-            <label for="tongue-web">Tongue Web Piercing</label><br>
-
-            <input type="checkbox" id="tragus" name="services" value="Tragus Piercing">
-            <label for="tragus">Tragus Piercing</label><br>
-
-            <input type="checkbox" id="vch" name="services" value="VCH Piercing">
-            <label for="vch">VCH Piercing</label><br>
-
-            <input type="checkbox" id="vertical-labret" name="services" value="Vertical Labret Piercing">
-            <label for="vertical-labret">Vertical Labret Piercing</label><br>
-
-            <input type="checkbox" id="jewelry-one" name="services" value="Jewelry Change (One Change)">
-            <label for="jewelry-one">Jewelry Change (One Change)</label><br>
-
-            <input type="checkbox" id="jewelry-two" name="services" value="Jewelry Change (Two Changes)">
-            <label for="jewelry-two">Jewelry Change (Two Changes)</label><br>
-
-            <input type="checkbox" id="jewelry-three" name="services" value="Jewelry Change (Three Changes)">
-            <label for="jewelry-three">Jewelry Change (Three Changes)</label><br>
-
-            <input type="checkbox" id="jewelry-four" name="services" value="Jewelry Change (Four Changes)">
-            <label for="jewelry-four">Jewelry Change (Four Changes)</label><br>
-
-            <input type="checkbox" id="jewelry-five" name="services" value="Jewelry Change (Five Changes)">
-            <label for="jewelry-five">Jewelry Change (Five Changes)</label><br>
-
-            <input type="checkbox" id="jewelry-six" name="services" value="Jewelry Change (Six Changes)">
-            <label for="jewelry-six">Jewelry Change (Six Changes)</label><br>
-
-            <input type="checkbox" id="jewelry-seven" name="services" value="Jewelry Change (Seven Changes)">
-            <label for="jewelry-seven">Jewelry Change (Seven Changes)</label><br>
-
-            <input type="checkbox" id="jewelry-eight" name="services" value="Jewelry Change (Eight Changes)">
-            <label for="jewelry-eight">Jewelry Change (Eight Changes)</label><br>
-
-            <input type="checkbox" id="downsize-one" name="services" value="Jewelry Downsize (One)">
-            <label for="downsize-one">Jewelry Downsize (One)</label><br>
-
-            <input type="checkbox" id="downsize-two" name="services" value="Jewelry Downsize (Two)">
-            <label for="downsize-two">Jewelry Downsize (Two)</label><br>
-
-            <input type="checkbox" id="downsize-three" name="services" value="Jewelry Downsize (Three)">
-            <label for="downsize-three">Jewelry Downsize (Three)</label><br>
-
-            <input type="checkbox" id="downsize-four" name="services" value="Jewelry Downsize (Four)">
-            <label for="downsize-four">Jewelry Downsize (Four)</label><br>
-
-            <input type="checkbox" id="downsize-five" name="services" value="Jewelry Downsize (Five)">
-            <label for="downsize-five">Jewelry Downsize (Five)</label><br>
-
-            <input type="checkbox" id="downsize-six" name="services" value="Jewelry Downsize (Six)">
-            <label for="downsize-six">Jewelry Downsize (Six)</label><br>
-
-            <input type="checkbox" id="downsize-seven" name="services" value="Jewelry Downsize (Seven)">
-            <label for="downsize-seven">Jewelry Downsize (Seven)</label><br>
-
-            <input type="checkbox" id="downsize-eight" name="services" value="Jewelry Downsize (Eight)">
-            <label for="downsize-eight">Jewelry Downsize (Eight)</label><br>
-
-            <input type="checkbox" id="removal-dermal" name="services" value="Jewelry Removal (Dermal)">
-            <label for="removal-dermal">Jewelry Removal (Dermal)</label><br>
-
-            <input type="checkbox" id="removal-general" name="services" value="Jewelry Removal (General)">
-            <label for="removal-general">Jewelry Removal (General)</label><br>
-
-            <input type="checkbox" id="checkup" name="services" value="General Checkup">
-            <label for="checkup">General Checkup</label><br>
-
-            <input type="checkbox" id="cheek-dahlia-consultation" name="services" value="Cheek/Dahlia Consultation">
-            <label for="cheek-dahlia-consultation">Cheek/Dahlia Consultation</label><br>
+                <!-- Jewelry Downsizing/Consultation/Other Column -->
+                <ul class="services-column">
+                    <li><input type="checkbox" id="downsize-one" name="services" value="Jewelry Downsize (One)"><label for="downsize-one">Jewelry Downsize (One)</label></li>
+                    <li><input type="checkbox" id="downsize-two" name="services" value="Jewelry Downsize (Two)"><label for="downsize-two">Jewelry Downsize (Two)</label></li>
+                    <li><input type="checkbox" id="downsize-three" name="services" value="Jewelry Downsize (Three)"><label for="downsize-three">Jewelry Downsize (Three)</label></li>
+                    <li><input type="checkbox" id="downsize-four" name="services" value="Jewelry Downsize (Four)"><label for="downsize-four">Jewelry Downsize (Four)</label></li>
+                    <li><input type="checkbox" id="downsize-five" name="services" value="Jewelry Downsize (Five)"><label for="downsize-five">Jewelry Downsize (Five)</label></li>
+                    <li><input type="checkbox" id="downsize-six" name="services" value="Jewelry Downsize (Six)"><label for="downsize-six">Jewelry Downsize (Six)</label></li>
+                    <li><input type="checkbox" id="downsize-seven" name="services" value="Jewelry Downsize (Seven)"><label for="downsize-seven">Jewelry Downsize (Seven)</label></li>
+                    <li><input type="checkbox" id="downsize-eight" name="services" value="Jewelry Downsize (Eight)"><label for="downsize-eight">Jewelry Downsize (Eight)</label></li>
+                    <li><input type="checkbox" id="removal-dermal" name="services" value="Jewelry Removal (Dermal)"><label for="removal-dermal">Jewelry Removal (Dermal)</label></li>
+                    <li><input type="checkbox" id="removal-general" name="services" value="Jewelry Removal (General)"><label for="removal-general">Jewelry Removal (General)</label></li>
+                    <li><input type="checkbox" id="checkup" name="services" value="General Checkup"><label for="checkup">General Checkup</label></li>
+                    <li><input type="checkbox" id="cheek-dahlia-consultation" name="services" value="Cheek/Dahlia Consultation"><label for="cheek-dahlia-consultation">Cheek/Dahlia Consultation</label></li>
+                </ul>
+            </div>
         </fieldset>
 
         <button type="submit">Submit</button>
