@@ -64,63 +64,57 @@
         function toggleTextBox() {
             const checkboxes = document.querySelectorAll('input[name="services"]:checked');
             const textBox = document.getElementById('piercing-change-textbox');
-
-            // Check if any jewelry change or downsizing checkbox is selected
+    
             const jewelryChangeOrDownsizeSelected = Array.from(checkboxes).some(checkbox => {
                 return checkbox.value.includes('Jewelry Change') || checkbox.value.includes('Downsize');
             });
-
-            // Show or hide the text box based on the selection
+    
             textBox.style.display = jewelryChangeOrDownsizeSelected ? 'block' : 'none';
         }
-
-         // Function to show or hide services based on piercer selection
+    
         function updateServicesBasedOnPiercer() {
-            // Get the selected piercer value
             const selectedPiercer = document.querySelector('input[name="piercer"]:checked');
-
-            // Get the service checkboxes
+    
             const piercingServices = [
                 'Hidden Helix Piercing',
                 'Helix Piercing',
                 'Conch Piercing'
             ];
-
+    
             const nonPiercingServices = [
                 'Cheek/Dahlia Consultation',
                 'Jewelry Removal (Dermal)'
             ];
-
-            // Get all the checkboxes from the "Select Service(s)" field
+    
             const checkboxes = document.querySelectorAll('.services-container input[type="checkbox"]');
-
-            // Loop through the checkboxes to hide or show services
+    
             checkboxes.forEach(checkbox => {
-                const label = checkbox.nextElementSibling.innerText.trim(); // Get the label text
-
+                const label = checkbox.nextElementSibling.innerText.trim();
+    
                 if (selectedPiercer && selectedPiercer.value === 'Jennica') {
-                    // Hide all piercing services except for the allowed ones for Jennica
                     if (piercingServices.includes(label) || nonPiercingServices.includes(label)) {
-                        checkbox.parentElement.style.display = 'flex'; // Show allowed services
+                        checkbox.parentElement.style.display = 'flex';
                     } else {
-                        checkbox.parentElement.style.display = 'none'; // Hide the rest
+                        checkbox.parentElement.style.display = 'none';
                     }
                 } else {
-                    // Show all services for other piercers or if no selection
                     checkbox.parentElement.style.display = 'flex';
                 }
             });
         }
-
-        // Listen for changes on the piercer selection
-        const piercerRadios = document.querySelectorAll('input[name="piercer"]');
-        piercerRadios.forEach(radio => {
-            radio.addEventListener('change', updateServicesBasedOnPiercer);
-        });
-
-        // Initialize the services based on the default piercer selection (if any)
-        window.onload = updateServicesBasedOnPiercer;
+    
+        window.onload = function() {
+            // Initialize services based on default piercer selection
+            updateServicesBasedOnPiercer();
+    
+            // Listen for changes on piercer selection
+            const piercerRadios = document.querySelectorAll('input[name="piercer"]');
+            piercerRadios.forEach(radio => {
+                radio.addEventListener('change', updateServicesBasedOnPiercer);
+            });
+        };
     </script>
+    
 </head>
 <body>
     <h1>Piercing Service Form</h1>
