@@ -73,35 +73,47 @@
         }
     
         function updateServicesBasedOnPiercer() {
-            const selectedPiercer = document.querySelector('input[name="piercer"]:checked');
-    
-            const piercingServices = [
-                'Hidden Helix Piercing',
-                'Helix Piercing',
-                'Conch Piercing'
-            ];
-    
-            const nonPiercingServices = [
-                'Cheek/Dahlia Consultation',
-                'Jewelry Removal (Dermal)'
-            ];
-    
-            const checkboxes = document.querySelectorAll('.services-container input[type="checkbox"]');
-    
-            checkboxes.forEach(checkbox => {
-                const label = checkbox.nextElementSibling.innerText.trim();
-    
-                if (selectedPiercer && selectedPiercer.value === 'Jennica') {
-                    if (piercingServices.includes(label) || nonPiercingServices.includes(label)) {
-                        checkbox.parentElement.style.display = 'flex';
-                    } else {
-                        checkbox.parentElement.style.display = 'none';
-                    }
-                } else {
-                    checkbox.parentElement.style.display = 'flex';
-                }
-            });
-        }
+        const selectedPiercer = document.querySelector('input[name="piercer"]:checked');
+
+        const piercingServices = [
+            'Hidden Helix Piercing',
+            'Helix Piercing',
+            'Conch Piercing'
+        ];
+
+        const jewelryChangesAndDownsizes = [
+            'Jewelry Change (One Change)',
+            'Jewelry Change (Two Changes)',
+            'Jewelry Change (Three Changes)',
+            'Jewelry Change (Four Changes)',
+            'Jewelry Change (Five Changes)',
+            'Jewelry Change (Six Changes)',
+            'Jewelry Change (Seven Changes)',
+            'Jewelry Change (Eight Changes)',
+            'Jewelry Downsize (One)',
+            'Jewelry Downsize (Two)',
+            'Jewelry Downsize (Three)',
+            'Jewelry Downsize (Four)',
+            'Jewelry Downsize (Five)',
+            'Jewelry Downsize (Six)',
+            'Jewelry Downsize (Seven)',
+            'Jewelry Downsize (Eight)',
+            'Jewelry Removal (General)',
+            'General Checkup'
+        ];
+
+        const checkboxes = document.querySelectorAll('.services-container input[type="checkbox"]');
+
+        checkboxes.forEach(checkbox => {
+            const label = checkbox.nextElementSibling.innerText.trim();
+
+            if (selectedPiercer && selectedPiercer.value === 'Jennica') {
+                checkbox.parentElement.style.display = piercingServices.includes(label) || jewelryChangesAndDownsizes.includes(label) ? 'flex' : 'none';
+            } else {
+                checkbox.parentElement.style.display = 'flex';
+            }
+        });
+    }
     
         window.onload = function() {
             // Initialize services based on default piercer selection
