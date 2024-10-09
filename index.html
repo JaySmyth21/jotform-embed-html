@@ -151,25 +151,22 @@
             textBox.style.display = jewelryChangeOrDownsizeSelected ? 'block' : 'none';
 
             // Validation for the number of selected checkboxes
-            const checkedCount = checkboxes.length;
-            if (checkedCount > 3) {
-                alert("You can select a maximum of three services.");
-                // Uncheck the last checkbox if the limit is exceeded
-                const lastChecked = checkboxes[checkedCount - 1];
-                lastChecked.checked = false;
-            }
+            const checkedCount = document.querySelectorAll('input[name="services"]:checked').length;
             
-            // Disable other checkboxes if 3 are checked
-            checkboxes.forEach(checkbox => {
-                checkbox.disabled = true;
+            const allCheckboxes = document.querySelectorAll('input[name="services"]');
+            allCheckboxes.forEach(checkbox => {
+                if (checkedCount >= 3) {
+                    // Disable unchecked checkboxes if three are already selected
+                    if (!checkbox.checked) {
+                        checkbox.disabled = true;
+                    }
+                } else {
+                    // Enable all checkboxes if less than three are selected
+                    checkbox.disabled = false;
+                }
             });
-
-            if (checkedCount < 3) {
-                checkboxes.forEach(checkbox => {
-                    checkbox.disabled = false; // Re-enable if less than 3 are checked
-                });
-            }
         }
+
 
     
         window.onload = function() {
