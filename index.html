@@ -10,22 +10,27 @@
     <!-- Embed your JotForm -->
     <iframe id="jotform-iframe" src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
 
-<script>
-    window.addEventListener("message", function(event) {
-    console.log("Received message:", event.data);
-    
-    const [fieldName, resourceStatus] = event.data.split(':');
+    <script>
+        // Listen for messages from the iframe
+        window.addEventListener("message", function(event) {
+            console.log("Received message:", event.data);
 
-    // Update the hidden field in JotForm using its unique name or field ID
-    if (fieldName === 'juniorPiercer') {
-        document.querySelector('input[name="q83_juniorpiercer"]').value = resourceStatus;
-    } else if (fieldName === 'piercerStatus') {
-        document.querySelector('input[name="q82_piercerstatus"]').value = resourceStatus;
-    }
+            // Parse the message, expecting format like 'piercerStatus:UNAVAILABLE'
+            const [fieldName, resourceStatus] = event.data.split(':');
 
-    console.log(`Updated ${fieldName} to: ${resourceStatus}`);
-});
+            // Update the appropriate hidden field in the JotForm iframe
+            const iframe = document.getElementById('jotform-iframe').contentWindow.document;
 
-</script>
+            if (fieldName === 'juniorPiercer') {
+                iframe.querySelector('input[name="q83_juniorpiercer"]').value = resourceStatus;
+                console.log(`Updated Junior Piercer to: ${resourceStatus}`);
+            } else if (fieldName === 'piercerStatus') {
+                iframe.querySelector('input[name="q82_piercerstatus"]').value = resourceStatus;
+                console.log(`Updated Piercer to: ${resourceStatus}`);
+            } else {
+                console.warn(`No matching field found for: ${fieldName}`);
+            }
+        });
+    </script>
 </body>
 </html>
