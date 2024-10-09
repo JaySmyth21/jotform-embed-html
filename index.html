@@ -6,124 +6,150 @@
     <title>Piercing Service Form</title>
     <style>
       body {
-    display: flex;
-    flex-direction: column; /* Stack the h1 and form vertically */
-    justify-content: center; /* Center the content horizontally */
-    align-items: center; /* Center the content vertically */
-    min-height: 100vh; /* Full viewport height */
-    margin: 0; /* Remove default margin */
-    background-color: #f7f7f7; /* Optional: Light background color */
-    }
+          display: flex;
+          flex-direction: column; /* Stack the h1 and form vertically */
+          justify-content: center; /* Center the content horizontally */
+          align-items: center; /* Center the content vertically */
+          min-height: 100vh; /* Full viewport height */
+          margin: 0; /* Remove default margin */
+          background-color: #f7f7f7; /* Optional: Light background color */
+      }
 
-    h1 {
-        text-align: center; /* Center-align the title text */
-        margin-bottom: 20px; /* Add space between the title and form */
-    }
+      h1 {
+          text-align: center; /* Center-align the title text */
+          margin-bottom: 20px; /* Add space between the title and form */
+      }
 
-    form {
-        width: 75%; /* Set form width to 75% of the page */
-        background-color: #fff; /* Optional: White background for the form */
-        padding: 20px; /* Optional: Padding around the form */
-        border-radius: 8px; /* Optional: Rounded corners */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
-    }
+      form {
+          width: 75%; /* Set form width to 75% of the page */
+          background-color: #fff; /* Optional: White background for the form */
+          padding: 20px; /* Optional: Padding around the form */
+          border-radius: 8px; /* Optional: Rounded corners */
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
+      }
 
-    .services-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 20px;
-    }
+      .services-container {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 20px;
+      }
 
-    .services-column {
-        list-style: none;
-        padding: 0;
-    }
+      .services-column {
+          list-style: none;
+          padding: 0;
+      }
 
-    .services-column li {
-        display: flex;
-        align-items: center;
-        margin-bottom: 8px;
-    }
+      .services-column li {
+          display: flex;
+          align-items: center;
+          margin-bottom: 8px;
+      }
 
-    .services-column label {
-        margin-left: 8px; /* Add space between checkbox and label */
-    }
+      .services-column label {
+          margin-left: 8px; /* Add space between checkbox and label */
+      }
 
-    .column-title {
-        font-weight: bold; /* Bold text for column titles */
-        margin-bottom: 10px; /* Space between title and checkbox list */
-    }
+      .column-title {
+          font-weight: bold; /* Bold text for column titles */
+          margin-bottom: 10px; /* Space between title and checkbox list */
+      }
 
-    .conditional-input {
-        display: none; /* Hide by default */
-        margin-top: 20px; /* Add space above the text box */
-    }
-
+      .conditional-input {
+          display: none; /* Hide by default */
+          margin-top: 20px; /* Add space above the text box */
+      }
     </style>
     <script>
         function toggleTextBox() {
             const checkboxes = document.querySelectorAll('input[name="services"]:checked');
             const textBox = document.getElementById('piercing-change-textbox');
-    
+
             const jewelryChangeOrDownsizeSelected = Array.from(checkboxes).some(checkbox => {
                 return checkbox.value.includes('Jewelry Change') || checkbox.value.includes('Downsize');
             });
-    
+
             textBox.style.display = jewelryChangeOrDownsizeSelected ? 'block' : 'none';
-        }
-    
-        function updateServicesBasedOnPiercer() {
-        const selectedPiercer = document.querySelector('input[name="piercer"]:checked');
 
-        const piercingServices = [
-            'Hidden Helix Piercing',
-            'Helix Piercing',
-            'Conch Piercing'
-        ];
-
-        const jewelryChangesAndDownsizes = [
-            'Jewelry Change (One Change)',
-            'Jewelry Change (Two Changes)',
-            'Jewelry Change (Three Changes)',
-            'Jewelry Change (Four Changes)',
-            'Jewelry Change (Five Changes)',
-            'Jewelry Change (Six Changes)',
-            'Jewelry Change (Seven Changes)',
-            'Jewelry Change (Eight Changes)',
-            'Jewelry Downsize (One)',
-            'Jewelry Downsize (Two)',
-            'Jewelry Downsize (Three)',
-            'Jewelry Downsize (Four)',
-            'Jewelry Downsize (Five)',
-            'Jewelry Downsize (Six)',
-            'Jewelry Downsize (Seven)',
-            'Jewelry Downsize (Eight)',
-            'Jewelry Removal (General)',
-            'General Checkup'
-        ];
-
-        const checkboxes = document.querySelectorAll('.services-container input[type="checkbox"]');
-
-        checkboxes.forEach(checkbox => {
-            const label = checkbox.nextElementSibling.innerText.trim();
-
-            if (selectedPiercer && selectedPiercer.value === 'Jennica') {
-                checkbox.parentElement.style.display = piercingServices.includes(label) || jewelryChangesAndDownsizes.includes(label) ? 'flex' : 'none';
-            } else {
-                checkbox.parentElement.style.display = 'flex';
+            // Validation for the number of selected checkboxes
+            const checkedCount = checkboxes.length;
+            if (checkedCount > 3) {
+                alert("You can select a maximum of three services.");
+                // Uncheck the last checkbox if the limit is exceeded
+                const lastChecked = checkboxes[checkedCount - 1];
+                lastChecked.checked = false;
             }
-        });
-    }
-    
+        }
+
+        function updateServicesBasedOnPiercer() {
+            const selectedPiercer = document.querySelector('input[name="piercer"]:checked');
+
+            const piercingServices = [
+                'Hidden Helix Piercing',
+                'Helix Piercing',
+                'Conch Piercing'
+            ];
+
+            const jewelryChangesAndDownsizes = [
+                'Jewelry Change (One Change)',
+                'Jewelry Change (Two Changes)',
+                'Jewelry Change (Three Changes)',
+                'Jewelry Change (Four Changes)',
+                'Jewelry Change (Five Changes)',
+                'Jewelry Change (Six Changes)',
+                'Jewelry Change (Seven Changes)',
+                'Jewelry Change (Eight Changes)',
+                'Jewelry Downsize (One)',
+                'Jewelry Downsize (Two)',
+                'Jewelry Downsize (Three)',
+                'Jewelry Downsize (Four)',
+                'Jewelry Downsize (Five)',
+                'Jewelry Downsize (Six)',
+                'Jewelry Downsize (Seven)',
+                'Jewelry Downsize (Eight)',
+                'Jewelry Removal (General)',
+                'General Checkup'
+            ];
+
+            const checkboxes = document.querySelectorAll('.services-container input[type="checkbox"]');
+
+            checkboxes.forEach(checkbox => {
+                const label = checkbox.nextElementSibling.innerText.trim();
+
+                if (selectedPiercer && selectedPiercer.value === 'Jennica') {
+                    checkbox.parentElement.style.display = piercingServices.includes(label) || jewelryChangesAndDownsizes.includes(label) ? 'flex' : 'none';
+                } else {
+                    checkbox.parentElement.style.display = 'flex';
+                }
+            });
+        }
+
+        function validateServices(event) {
+            const checkboxes = document.querySelectorAll('input[name="services"]:checked');
+            const checkedCount = checkboxes.length;
+
+            // Require at least one service to be checked before submission
+            if (checkedCount < 1) {
+                alert("Please select at least one service.");
+                event.preventDefault(); // Prevent form submission
+                return false;
+            }
+
+            return true; // Allow form submission if valid
+        }
+
         window.onload = function() {
             // Initialize services based on default piercer selection
             updateServicesBasedOnPiercer();
-    
+
             // Listen for changes on piercer selection
             const piercerRadios = document.querySelectorAll('input[name="piercer"]');
             piercerRadios.forEach(radio => {
                 radio.addEventListener('change', updateServicesBasedOnPiercer);
             });
+
+            // Listen for form submission to validate
+            const form = document.querySelector('form');
+            form.addEventListener('submit', validateServices);
         };
     </script>
     
@@ -147,7 +173,6 @@
             <legend>Select Service(s)</legend>
 
             <div class="services-container">
-
                 <!-- Piercings Column -->
                 <div>
                     <div class="column-title">Piercing</div>
@@ -163,78 +188,54 @@
                         <li><input type="checkbox" id="fangs" name="services" value="Fangs Piercing" onclick="toggleTextBox()"><label for="fangs">Fangs Piercing</label></li>
                         <li><input type="checkbox" id="flat" name="services" value="Flat/Scapha Piercing" onclick="toggleTextBox()"><label for="flat">Flat/Scapha Piercing</label></li>
                         <li><input type="checkbox" id="forward-helix" name="services" value="Forward Helix Piercing" onclick="toggleTextBox()"><label for="forward-helix">Forward Helix Piercing</label></li>
-                        <li><input type="checkbox" id="helix" name="services" value="Helix Piercing" onclick="toggleTextBox()"><label for="helix">Helix Piercing</label></li>
-                        <li><input type="checkbox" id="hidden-helix" name="services" value="Hidden Helix Piercing" onclick="toggleTextBox()"><label for="hidden-helix">Hidden Helix Piercing</label></li>
+                        <li><input type="checkbox" id="grid" name="services" value="Grid Piercing" onclick="toggleTextBox()"><label for="grid">Grid Piercing</label></li>
+                        <li><input type="checkbox" id="hood" name="services" value="Hood Piercing" onclick="toggleTextBox()"><label for="hood">Hood Piercing</label></li>
                         <li><input type="checkbox" id="industrial" name="services" value="Industrial Piercing" onclick="toggleTextBox()"><label for="industrial">Industrial Piercing</label></li>
-                        <li><input type="checkbox" id="jestrum" name="services" value="Jestrum (Vertical Philtrum) Piercing" onclick="toggleTextBox()"><label for="jestrum">Jestrum (Vertical Philtrum) Piercing</label></li>
-                        <li><input type="checkbox" id="labia" name="services" value="Labia Piercing" onclick="toggleTextBox()"><label for="labia">Labia Piercing</label></li>
-                        <li><input type="checkbox" id="labret" name="services" value="Labret Piercing" onclick="toggleTextBox()"><label for="labret">Labret Piercing</label></li>
-                        <li><input type="checkbox" id="lobe-single" name="services" value="Lobe Piercing (Single)" onclick="toggleTextBox()"><label for="lobe-single">Lobe Piercing (Single)</label></li>
-                        <li><input type="checkbox" id="lobe-pair" name="services" value="Lobe Piercing (Pair)" onclick="toggleTextBox()"><label for="lobe-pair">Lobe Piercing (Pair)</label></li>
-                        <li><input type="checkbox" id="lobe-child-single" name="services" value="Lobe Piercing Ages 5-12 (Single)" onclick="toggleTextBox()"><label for="lobe-child-single">Lobe Piercing Ages 5-12 (Single)</label></li>
-                        <li><input type="checkbox" id="lobe-child-pair" name="services" value="Lobe Piercing Ages 5-12 (Pair)" onclick="toggleTextBox()"><label for="lobe-child-pair">Lobe Piercing Ages 5-12 (Pair)</label></li>
-                        <li><input type="checkbox" id="mantis" name="services" value="Mantis (Forward Facing Nostrils) Piercing" onclick="toggleTextBox()"><label for="mantis">Mantis (Forward Facing Nostrils) Piercing</label></li>
-                        <li><input type="checkbox" id="monroe" name="services" value="Monroe or Madonna Piercing" onclick="toggleTextBox()"><label for="monroe">Monroe or Madonna Piercing</label></li>
+                        <li><input type="checkbox" id="lip" name="services" value="Lip Piercing" onclick="toggleTextBox()"><label for="lip">Lip Piercing</label></li>
                         <li><input type="checkbox" id="navel" name="services" value="Navel Piercing" onclick="toggleTextBox()"><label for="navel">Navel Piercing</label></li>
-                        <li><input type="checkbox" id="nipple-single" name="services" value="Nipple Piercing (Single)" onclick="toggleTextBox()"><label for="nipple-single">Nipple Piercing (Single)</label></li>
-                        <li><input type="checkbox" id="nipple-pair" name="services" value="Nipple Piercing (Pair)" onclick="toggleTextBox()"><label for="nipple-pair">Nipple Piercing (Pair)</label></li>
-                        <li><input type="checkbox" id="nostril" name="services" value="Nostril Piercing" onclick="toggleTextBox()"><label for="nostril">Nostril Piercing</label></li>
-                        <li><input type="checkbox" id="orbital" name="services" value="Orbital Piercing" onclick="toggleTextBox()"><label for="orbital">Orbital Piercing</label></li>
-                        <li><input type="checkbox" id="philtrum" name="services" value="Philtrum/Medusa Piercing" onclick="toggleTextBox()"><label for="philtrum">Philtrum/Medusa Piercing</label></li>
-                        <li><input type="checkbox" id="rook" name="services" value="Rook Piercing" onclick="toggleTextBox()"><label for="rook">Rook Piercing</label></li>
+                        <li><input type="checkbox" id="nose" name="services" value="Nose Piercing" onclick="toggleTextBox()"><label for="nose">Nose Piercing</label></li>
                         <li><input type="checkbox" id="septum" name="services" value="Septum Piercing" onclick="toggleTextBox()"><label for="septum">Septum Piercing</label></li>
-                        <li><input type="checkbox" id="snake-bites" name="services" value="Snake Bites Piercing" onclick="toggleTextBox()"><label for="snake-bites">Snake Bites Piercing</label></li>
+                        <li><input type="checkbox" id="surface" name="services" value="Surface Piercing" onclick="toggleTextBox()"><label for="surface">Surface Piercing</label></li>
                         <li><input type="checkbox" id="tongue" name="services" value="Tongue Piercing" onclick="toggleTextBox()"><label for="tongue">Tongue Piercing</label></li>
-                        <li><input type="checkbox" id="tongue-web" name="services" value="Tongue Web Piercing" onclick="toggleTextBox()"><label for="tongue-web">Tongue Web Piercing</label></li>
                         <li><input type="checkbox" id="tragus" name="services" value="Tragus Piercing" onclick="toggleTextBox()"><label for="tragus">Tragus Piercing</label></li>
-                        <li><input type="checkbox" id="vch" name="services" value="VCH Piercing" onclick="toggleTextBox()"><label for="vch">VCH Piercing</label></li>
                         <li><input type="checkbox" id="vertical-labret" name="services" value="Vertical Labret Piercing" onclick="toggleTextBox()"><label for="vertical-labret">Vertical Labret Piercing</label></li>
                     </ul>
                 </div>
 
-                <!-- Jewelry Changes Column -->
+                <!-- Services Column -->
                 <div>
-                    <div class="column-title">Jewelry Change</div>
+                    <div class="column-title">Jewelry Change / Downsizing</div>
                     <ul class="services-column">
-                        <li><input type="checkbox" id="jewelry-one" name="services" value="Jewelry Change (One Change)" onclick="toggleTextBox()"><label for="jewelry-one">Jewelry Change (One Change)</label></li>
-                        <li><input type="checkbox" id="jewelry-two" name="services" value="Jewelry Change (Two Changes)" onclick="toggleTextBox()"><label for="jewelry-two">Jewelry Change (Two Changes)</label></li>
-                        <li><input type="checkbox" id="jewelry-three" name="services" value="Jewelry Change (Three Changes)" onclick="toggleTextBox()"><label for="jewelry-three">Jewelry Change (Three Changes)</label></li>
-                        <li><input type="checkbox" id="jewelry-four" name="services" value="Jewelry Change (Four Changes)" onclick="toggleTextBox()"><label for="jewelry-four">Jewelry Change (Four Changes)</label></li>
-                        <li><input type="checkbox" id="jewelry-five" name="services" value="Jewelry Change (Five Changes)" onclick="toggleTextBox()"><label for="jewelry-five">Jewelry Change (Five Changes)</label></li>
-                        <li><input type="checkbox" id="jewelry-six" name="services" value="Jewelry Change (Six Changes)" onclick="toggleTextBox()"><label for="jewelry-six">Jewelry Change (Six Changes)</label></li>
-                        <li><input type="checkbox" id="jewelry-seven" name="services" value="Jewelry Change (Seven Changes)" onclick="toggleTextBox()"><label for="jewelry-seven">Jewelry Change (Seven Changes)</label></li>
-                        <li><input type="checkbox" id="jewelry-eight" name="services" value="Jewelry Change (Eight Changes)" onclick="toggleTextBox()"><label for="jewelry-eight">Jewelry Change (Eight Changes)</label></li>
-                    </ul>
-                </div>
-
-                <!-- Jewelry Downsizing/Consultation/Other Column -->
-                <div>
-                    <div class="column-title">Jewelry Downsize</div>
-                    <ul class="services-column">
-                        <li><input type="checkbox" id="downsize-one" name="services" value="Jewelry Downsize (One)" onclick="toggleTextBox()"><label for="downsize-one">Jewelry Downsize (One)</label></li>
-                        <li><input type="checkbox" id="downsize-two" name="services" value="Jewelry Downsize (Two)" onclick="toggleTextBox()"><label for="downsize-two">Jewelry Downsize (Two)</label></li>
-                        <li><input type="checkbox" id="downsize-three" name="services" value="Jewelry Downsize (Three)" onclick="toggleTextBox()"><label for="downsize-three">Jewelry Downsize (Three)</label></li>
-                        <li><input type="checkbox" id="downsize-four" name="services" value="Jewelry Downsize (Four)" onclick="toggleTextBox()"><label for="downsize-four">Jewelry Downsize (Four)</label></li>
-                        <li><input type="checkbox" id="downsize-five" name="services" value="Jewelry Downsize (Five)" onclick="toggleTextBox()"><label for="downsize-five">Jewelry Downsize (Five)</label></li>
-                        <li><input type="checkbox" id="downsize-six" name="services" value="Jewelry Downsize (Six)" onclick="toggleTextBox()"><label for="downsize-six">Jewelry Downsize (Six)</label></li>
-                        <li><input type="checkbox" id="downsize-seven" name="services" value="Jewelry Downsize (Seven)" onclick="toggleTextBox()"><label for="downsize-seven">Jewelry Downsize (Seven)</label></li>
-                        <li><input type="checkbox" id="downsize-eight" name="services" value="Jewelry Downsize (Eight)" onclick="toggleTextBox()"><label for="downsize-eight">Jewelry Downsize (Eight)</label></li>
-                        <li><input type="checkbox" id="removal-dermal" name="services" value="Jewelry Removal (Dermal)" onclick="toggleTextBox()"><label for="removal-dermal">Jewelry Removal (Dermal)</label></li>
-                        <li><input type="checkbox" id="removal-general" name="services" value="Jewelry Removal (General)" onclick="toggleTextBox()"><label for="removal-general">Jewelry Removal (General)</label></li>
-                        <li><input type="checkbox" id="checkup" name="services" value="General Checkup" onclick="toggleTextBox()"><label for="checkup">General Checkup</label></li>
-                        <li><input type="checkbox" id="cheek-dahlia-consultation" name="services" value="Cheek/Dahlia Consultation" onclick="toggleTextBox()"><label for="cheek-dahlia-consultation">Cheek/Dahlia Consultation</label></li>
+                        <li><input type="checkbox" id="jewelry-change-one" name="services" value="Jewelry Change (One Change)" onclick="toggleTextBox()"><label for="jewelry-change-one">Jewelry Change (One Change)</label></li>
+                        <li><input type="checkbox" id="jewelry-change-two" name="services" value="Jewelry Change (Two Changes)" onclick="toggleTextBox()"><label for="jewelry-change-two">Jewelry Change (Two Changes)</label></li>
+                        <li><input type="checkbox" id="jewelry-change-three" name="services" value="Jewelry Change (Three Changes)" onclick="toggleTextBox()"><label for="jewelry-change-three">Jewelry Change (Three Changes)</label></li>
+                        <li><input type="checkbox" id="jewelry-change-four" name="services" value="Jewelry Change (Four Changes)" onclick="toggleTextBox()"><label for="jewelry-change-four">Jewelry Change (Four Changes)</label></li>
+                        <li><input type="checkbox" id="jewelry-change-five" name="services" value="Jewelry Change (Five Changes)" onclick="toggleTextBox()"><label for="jewelry-change-five">Jewelry Change (Five Changes)</label></li>
+                        <li><input type="checkbox" id="jewelry-change-six" name="services" value="Jewelry Change (Six Changes)" onclick="toggleTextBox()"><label for="jewelry-change-six">Jewelry Change (Six Changes)</label></li>
+                        <li><input type="checkbox" id="jewelry-change-seven" name="services" value="Jewelry Change (Seven Changes)" onclick="toggleTextBox()"><label for="jewelry-change-seven">Jewelry Change (Seven Changes)</label></li>
+                        <li><input type="checkbox" id="jewelry-change-eight" name="services" value="Jewelry Change (Eight Changes)" onclick="toggleTextBox()"><label for="jewelry-change-eight">Jewelry Change (Eight Changes)</label></li>
+                        <li><input type="checkbox" id="jewelry-downsize-one" name="services" value="Jewelry Downsize (One)" onclick="toggleTextBox()"><label for="jewelry-downsize-one">Jewelry Downsize (One)</label></li>
+                        <li><input type="checkbox" id="jewelry-downsize-two" name="services" value="Jewelry Downsize (Two)" onclick="toggleTextBox()"><label for="jewelry-downsize-two">Jewelry Downsize (Two)</label></li>
+                        <li><input type="checkbox" id="jewelry-downsize-three" name="services" value="Jewelry Downsize (Three)" onclick="toggleTextBox()"><label for="jewelry-downsize-three">Jewelry Downsize (Three)</label></li>
+                        <li><input type="checkbox" id="jewelry-downsize-four" name="services" value="Jewelry Downsize (Four)" onclick="toggleTextBox()"><label for="jewelry-downsize-four">Jewelry Downsize (Four)</label></li>
+                        <li><input type="checkbox" id="jewelry-downsize-five" name="services" value="Jewelry Downsize (Five)" onclick="toggleTextBox()"><label for="jewelry-downsize-five">Jewelry Downsize (Five)</label></li>
+                        <li><input type="checkbox" id="jewelry-downsize-six" name="services" value="Jewelry Downsize (Six)" onclick="toggleTextBox()"><label for="jewelry-downsize-six">Jewelry Downsize (Six)</label></li>
+                        <li><input type="checkbox" id="jewelry-downsize-seven" name="services" value="Jewelry Downsize (Seven)" onclick="toggleTextBox()"><label for="jewelry-downsize-seven">Jewelry Downsize (Seven)</label></li>
+                        <li><input type="checkbox" id="jewelry-downsize-eight" name="services" value="Jewelry Downsize (Eight)" onclick="toggleTextBox()"><label for="jewelry-downsize-eight">Jewelry Downsize (Eight)</label></li>
+                        <li><input type="checkbox" id="jewelry-removal" name="services" value="Jewelry Removal (General)" onclick="toggleTextBox()"><label for="jewelry-removal">Jewelry Removal (General)</label></li>
+                        <li><input type="checkbox" id="general-checkup" name="services" value="General Checkup" onclick="toggleTextBox()"><label for="general-checkup">General Checkup</label></li>
                     </ul>
                 </div>
             </div>
         </fieldset>
 
-        <!-- Conditional Text Box -->
-        <div class="conditional-input" id="piercing-change-textbox">
-            <label for="piercing-change">Please specify which piercing is getting changed or downsized:</label><br>
-            <input type="text" id="piercing-change" name="piercing-change">
+        <!-- Conditional text box for Jewelry Change and Downsizing -->
+        <div id="piercing-change-textbox" class="conditional-input">
+            <label for="piercing-change-details">Please specify jewelry change details:</label><br>
+            <textarea id="piercing-change-details" name="piercing-change-details" rows="4" cols="50"></textarea>
         </div>
 
-        <button type="submit">Submit</button>
+        <input type="submit" value="Submit">
     </form>
 </body>
 </html>
