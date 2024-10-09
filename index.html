@@ -5,53 +5,60 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piercing Service Form</title>
     <style>
-       body {
-            display: flex;
-            justify-content: center; /* Center the form horizontally */
-            align-items: center; /* Center the form vertically */
-            min-height: 100vh; /* Full viewport height */
-            margin: 0; /* Remove default margin */
-            background-color: #f7f7f7; /* Optional: Light background color */
-        }
+      body {
+    display: flex;
+    flex-direction: column; /* Stack the h1 and form vertically */
+    justify-content: center; /* Center the content horizontally */
+    align-items: center; /* Center the content vertically */
+    min-height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+    background-color: #f7f7f7; /* Optional: Light background color */
+    }
 
-        form {
-            width: 75%; /* Set form width to 75% of the page */
-            background-color: #fff; /* Optional: White background for the form */
-            padding: 20px; /* Optional: Padding around the form */
-            border-radius: 8px; /* Optional: Rounded corners */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
-        }
+    h1 {
+        text-align: center; /* Center-align the title text */
+        margin-bottom: 20px; /* Add space between the title and form */
+    }
 
-        .services-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            gap: 20px;
-        }
+    form {
+        width: 75%; /* Set form width to 75% of the page */
+        background-color: #fff; /* Optional: White background for the form */
+        padding: 20px; /* Optional: Padding around the form */
+        border-radius: 8px; /* Optional: Rounded corners */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
+    }
 
-        .services-column {
-            list-style: none;
-            padding: 0;
-        }
+    .services-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 20px;
+    }
 
-        .services-column li {
-            display: flex;
-            align-items: center;
-            margin-bottom: 8px;
-        }
+    .services-column {
+        list-style: none;
+        padding: 0;
+    }
 
-        .services-column label {
-            margin-left: 8px; /* Add space between checkbox and label */
-        }
+    .services-column li {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+    }
 
-        .column-title {
-            font-weight: bold; /* Bold text for column titles */
-            margin-bottom: 10px; /* Space between title and checkbox list */
-        }
+    .services-column label {
+        margin-left: 8px; /* Add space between checkbox and label */
+    }
 
-        .conditional-input {
-            display: none; /* Hide by default */
-            margin-top: 20px; /* Add space above the text box */
-        }
+    .column-title {
+        font-weight: bold; /* Bold text for column titles */
+        margin-bottom: 10px; /* Space between title and checkbox list */
+    }
+
+    .conditional-input {
+        display: none; /* Hide by default */
+        margin-top: 20px; /* Add space above the text box */
+    }
+
     </style>
     <script>
         function toggleTextBox() {
