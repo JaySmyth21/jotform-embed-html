@@ -63,13 +63,13 @@
         function toggleTextBox() {
             const checkboxes = document.querySelectorAll('input[name="services"]:checked');
             const textBox = document.getElementById('piercing-change-textbox');
-
+    
             const jewelryChangeOrDownsizeSelected = Array.from(checkboxes).some(checkbox => {
                 return checkbox.value.includes('Jewelry Change') || checkbox.value.includes('Downsize');
             });
-
+    
             textBox.style.display = jewelryChangeOrDownsizeSelected ? 'block' : 'none';
-
+    
             // Validation for the number of selected checkboxes
             const checkedCount = checkboxes.length;
             if (checkedCount > 3) {
@@ -79,17 +79,19 @@
                 lastChecked.checked = false;
             }
         }
-
+    
         function updateServicesBasedOnPiercer() {
             const selectedPiercer = document.querySelector('input[name="piercer"]:checked');
-
-            const piercingServices = [
+    
+            // Define the visible services for Jennica
+            const visibleForJennica = [
                 'Hidden Helix Piercing',
                 'Helix Piercing',
                 'Conch Piercing'
             ];
-
-            const jewelryChangesAndDownsizes = [
+    
+            // Define the other services
+            const otherServices = [
                 'Jewelry Change (One Change)',
                 'Jewelry Change (Two Changes)',
                 'Jewelry Change (Three Changes)',
@@ -109,49 +111,52 @@
                 'Jewelry Removal (General)',
                 'General Checkup'
             ];
-
+    
             const checkboxes = document.querySelectorAll('.services-container input[type="checkbox"]');
-
+    
             checkboxes.forEach(checkbox => {
                 const label = checkbox.nextElementSibling.innerText.trim();
-
+    
                 if (selectedPiercer && selectedPiercer.value === 'Jennica') {
-                    checkbox.parentElement.style.display = piercingServices.includes(label) || jewelryChangesAndDownsizes.includes(label) ? 'flex' : 'none';
+                    // Show only specific services when Jennica is selected
+                    checkbox.parentElement.style.display = (visibleForJennica.includes(label) || otherServices.includes(label)) ? 'flex' : 'none';
                 } else {
+                    // Show all services when other piercers are selected
                     checkbox.parentElement.style.display = 'flex';
                 }
             });
         }
-
+    
         function validateServices(event) {
             const checkboxes = document.querySelectorAll('input[name="services"]:checked');
             const checkedCount = checkboxes.length;
-
+    
             // Require at least one service to be checked before submission
             if (checkedCount < 1) {
                 alert("Please select at least one service.");
                 event.preventDefault(); // Prevent form submission
                 return false;
             }
-
+    
             return true; // Allow form submission if valid
         }
-
+    
         window.onload = function() {
             // Initialize services based on default piercer selection
             updateServicesBasedOnPiercer();
-
+    
             // Listen for changes on piercer selection
             const piercerRadios = document.querySelectorAll('input[name="piercer"]');
             piercerRadios.forEach(radio => {
                 radio.addEventListener('change', updateServicesBasedOnPiercer);
             });
-
+    
             // Listen for form submission to validate
             const form = document.querySelector('form');
             form.addEventListener('submit', validateServices);
         };
     </script>
+    
     
 </head>
 <body>
