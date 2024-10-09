@@ -74,14 +74,13 @@
     
         function updateServicesBasedOnPiercer() {
             const selectedPiercer = document.querySelector('input[name="piercer"]:checked');
-    
             const piercingServices = [
                 'Hidden Helix Piercing',
                 'Helix Piercing',
                 'Conch Piercing'
             ];
-    
-            const nonPiercingServices = [
+            
+            const hiddenServices = [
                 'Cheek/Dahlia Consultation',
                 'Jewelry Removal (Dermal)'
             ];
@@ -90,15 +89,14 @@
     
             checkboxes.forEach(checkbox => {
                 const label = checkbox.nextElementSibling.innerText.trim();
+                checkbox.parentElement.style.display = 'none'; // Hide all by default
     
                 if (selectedPiercer && selectedPiercer.value === 'Jennica') {
-                    if (piercingServices.includes(label) || nonPiercingServices.includes(label)) {
-                        checkbox.parentElement.style.display = 'flex';
-                    } else {
-                        checkbox.parentElement.style.display = 'none';
+                    if (piercingServices.includes(label) || hiddenServices.includes(label)) {
+                        checkbox.parentElement.style.display = 'flex'; // Show specific services
                     }
                 } else {
-                    checkbox.parentElement.style.display = 'flex';
+                    checkbox.parentElement.style.display = 'flex'; // Show all services for other piercers
                 }
             });
         }
@@ -114,6 +112,7 @@
             });
         };
     </script>
+    
     
 </head>
 <body>
