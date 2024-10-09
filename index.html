@@ -11,26 +11,7 @@
     <iframe id="jotform-iframe" src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
 
     <script>
-        // Listen for messages from the iframe
-        window.addEventListener("message", function(event) {
-            console.log("Received message:", event.data);
-
-            // Parse the message, expecting format like 'piercerStatus:UNAVAILABLE'
-            const [fieldName, resourceStatus] = event.data.split(':');
-
-            // Update the appropriate hidden field in the JotForm iframe
-            const iframe = document.getElementById('jotform-iframe').contentWindow.document;
-
-            if (fieldName === 'juniorPiercer') {
-                iframe.querySelector('input[name="q83_juniorpiercer"]').value = resourceStatus;
-                console.log(`Updated Junior Piercer to: ${resourceStatus}`);
-            } else if (fieldName === 'piercerStatus') {
-                iframe.querySelector('input[name="q82_piercerstatus"]').value = resourceStatus;
-                console.log(`Updated Piercer to: ${resourceStatus}`);
-            } else {
-                console.warn(`No matching field found for: ${fieldName}`);
-            }
-        });
+       
     </script>
 </body>
 </html>
