@@ -92,8 +92,9 @@
                 checkbox.parentElement.style.display = 'none'; // Hide all by default
     
                 if (selectedPiercer && selectedPiercer.value === 'Jennica') {
-                    if (piercingServices.includes(label) || hiddenServices.includes(label)) {
-                        checkbox.parentElement.style.display = 'flex'; // Show specific services
+                    // Hide hiddenServices when Jennica is selected
+                    if (!hiddenServices.includes(label)) {
+                        checkbox.parentElement.style.display = 'flex'; // Show all except hiddenServices
                     }
                 } else {
                     checkbox.parentElement.style.display = 'flex'; // Show all services for other piercers
@@ -112,6 +113,7 @@
             });
         };
     </script>
+    
     
     
 </head>
