@@ -3,67 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your JotForm with Dynamic Logic</title>
+    <title>JotForm with Dynamic Logic</title>
 </head>
 <body>
     <h1>Your JotForm</h1>
-    <!-- Embed your JotForm here -->
-    <iframe src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
-    <script>
-        let juniorPiercerField;
-        let piercerField;
+    <!-- Embed your JotForm -->
+    <iframe id="jotform-iframe" src="https://form.jotform.com/242687434974269" style="width:100%; height:600px;" frameborder="0"></iframe>
 
-        window.onload = function() {
-            console.log("Document loaded. Checking field elements.");
+<script>
+    window.addEventListener("message", function(event) {
+        console.log("Received message:", event.data);
 
+        const parsedData = event.data.split(':');
         
-            // Get the field elements using their names
-            juniorPiercerField = document.querySelector('input[name="q81_juniorPiercerStatus"]');
-            piercerField = document.querySelector('input[name="q80_piercerStatus"]');
+        if (parsedData.length === 3) {
+            const fieldType = parsedData[0];
+            const resourceName = parsedData[1];
+            const resourceStatus = parsedData[2];
 
+            const jotformIframe = document.getElementById("jotform-iframe").contentWindow;
 
-            console.log("Junior Piercer Field:", juniorPiercerField);
-            console.log("Piercer Field:", piercerField);
-        };
-
-        window.addEventListener("message", function(event) {
-    console.log("Received message:", event.data);
-    
-    // Check for height messages and ignore them
-    if (event.data.startsWith("setHeight:")) {
-        return; // Ignore height messages
-    }
-
-    const parsedData = event.data.split(':');
-    
-    if (parsedData.length === 3) { // Expecting three parts
-        const fieldType = parsedData[0];
-        const resourceName = parsedData[1];
-        const resourceStatus = parsedData[2];
-
-        // Update fields based on the resource status
-        if (fieldType === "piercerstatus") {
-            if (piercerField) {
-                piercerField.value = `${resourceName}: ${resourceStatus}`;
-                console.log(`Updated Piercer Field: ${resourceName} - ${resourceStatus}`);
-            } else {
-                console.warn("Piercer Field not found.");
+            if (fieldType === "piercerstatus") {
+                jotformIframe.postMessage(`setValue:input_80:${resourceStatus}`, "*");
+                console.log(`Set Piercer Status to: ${resourceStatus}`);
+            } else if (fieldType === "juniorpiercerstatus") {
+                jotformIframe.postMessage(`setValue:input_81:${resourceStatus}`, "*");
+                console.log(`Set Junior Piercer Status to: ${resourceStatus}`);
             }
-        } else if (fieldType === "juniorpiercerstatus") {
-            if (juniorPiercerField) {
-                juniorPiercerField.value = `${resourceName}: ${resourceStatus}`;
-                console.log(`Updated Junior Piercer Field: ${resourceName} - ${resourceStatus}`);
-            } else {
-                console.warn("Junior Piercer Field not found.");
-            }
-        } else {
-            console.warn(`Unknown field type: ${fieldType}`);
         }
-    } else {
-        console.warn(`Received message format is incorrect: ${parsedData}`);
-    }
-});
-
-    </script>
+    });
+</script>
 </body>
 </html>
