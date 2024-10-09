@@ -140,6 +140,37 @@
     
             return true; // Allow form submission if valid
         }
+        function toggleTextBox() {
+            const checkboxes = document.querySelectorAll('input[name="services"]:checked');
+            const textBox = document.getElementById('piercing-change-textbox');
+
+            const jewelryChangeOrDownsizeSelected = Array.from(checkboxes).some(checkbox => {
+                return checkbox.value.includes('Jewelry Change') || checkbox.value.includes('Downsize');
+            });
+
+            textBox.style.display = jewelryChangeOrDownsizeSelected ? 'block' : 'none';
+
+            // Validation for the number of selected checkboxes
+            const checkedCount = checkboxes.length;
+            if (checkedCount > 3) {
+                alert("You can select a maximum of three services.");
+                // Uncheck the last checkbox if the limit is exceeded
+                const lastChecked = checkboxes[checkedCount - 1];
+                lastChecked.checked = false;
+            }
+            
+            // Disable other checkboxes if 3 are checked
+            checkboxes.forEach(checkbox => {
+                checkbox.disabled = true;
+            });
+
+            if (checkedCount < 3) {
+                checkboxes.forEach(checkbox => {
+                    checkbox.disabled = false; // Re-enable if less than 3 are checked
+                });
+            }
+        }
+
     
         window.onload = function() {
             // Initialize services based on default piercer selection
