@@ -33,6 +33,15 @@
         .modal-page.active {
             display: block; /* Show the active page */
         }
+
+        /* Styling for buttons */
+        .nav-buttons {
+            margin-top: 20px;
+        }
+
+        .nav-buttons button {
+            margin-right: 10px; /* Space between buttons */
+        }
     </style>
 </head>
 <body>
@@ -51,7 +60,9 @@
                 <option value="piercer2">Piercer 2</option>
                 <option value="piercer3">Piercer 3</option>
             </select>
-            <button onclick="nextPage(1)">Next</button>
+            <div class="nav-buttons">
+                <button onclick="nextPage(1)">Next</button>
+            </div>
         </div>
 
         <div id="modalPage2" class="modal-page">
@@ -77,8 +88,10 @@
                     <input type="checkbox" name="services" value="downsize"> Downsizing
                 </label>
             </div>
-            <button onclick="prevPage(2)">Previous</button>
-            <button onclick="nextPage(2)">Next</button>
+            <div class="nav-buttons">
+                <button onclick="prevPage(2)">Previous</button>
+                <button onclick="nextPage(2)">Next</button>
+            </div>
         </div>
 
         <div id="modalPage3" class="modal-page">
@@ -95,7 +108,9 @@
                 <br>
                 <button type="submit">Submit</button>
             </form>
-            <button onclick="prevPage(3)">Previous</button>
+            <div class="nav-buttons">
+                <button onclick="prevPage(3)">Previous</button>
+            </div>
         </div>
     </div>
 </div>
