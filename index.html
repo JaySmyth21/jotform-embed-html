@@ -5,62 +5,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Piercing Service Form</title>
     <style>
-      body {
-          display: flex;
-          flex-direction: column; /* Stack the h1 and form vertically */
-          justify-content: center; /* Center the content horizontally */
-          align-items: center; /* Center the content vertically */
-          min-height: 100vh; /* Full viewport height */
-          margin: 0; /* Remove default margin */
-          background-color: #f7f7f7; /* Optional: Light background color */
-      }
+        body {
+            display: flex;
+            flex-direction: column; /* Stack the h1 and form vertically */
+            justify-content: center; /* Center the content horizontally */
+            align-items: center; /* Center the content vertically */
+            min-height: 100vh; /* Full viewport height */
+            margin: 0; /* Remove default margin */
+            background-color: #f7f7f7; /* Optional: Light background color */
+        }
 
-      h1 {
-          text-align: center; /* Center-align the title text */
-          margin-bottom: 20px; /* Add space between the title and form */
-      }
+        h1 {
+            text-align: center; /* Center-align the title text */
+            margin-bottom: 20px; /* Add space between the title and form */
+        }
 
-      form {
-          width: 75%; /* Set form width to 75% of the page */
-          background-color: #fff; /* Optional: White background for the form */
-          padding: 20px; /* Optional: Padding around the form */
-          border-radius: 8px; /* Optional: Rounded corners */
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
-      }
+        form {
+            width: 75%; /* Set form width to 75% of the page */
+            background-color: #fff; /* Optional: White background for the form */
+            padding: 20px; /* Optional: Padding around the form */
+            border-radius: 8px; /* Optional: Rounded corners */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Subtle shadow for depth */
+            display: none; /* Hide form initially */
+        }
 
-      .services-container {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: 20px;
-      }
+        .services-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
 
-      .services-column {
-          list-style: none;
-          padding: 0;
-      }
+        .services-column {
+            list-style: none;
+            padding: 0;
+        }
 
-      .services-column li {
-          display: flex;
-          align-items: center;
-          margin-bottom: 8px;
-      }
+        .services-column li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
 
-      .services-column label {
-          margin-left: 8px; /* Add space between checkbox and label */
-      }
+        .services-column label {
+            margin-left: 8px; /* Add space between checkbox and label */
+        }
 
-      .column-title {
-          font-weight: bold; /* Bold text for column titles */
-          margin-bottom: 10px; /* Space between title and checkbox list */
-      }
+        .column-title {
+            font-weight: bold; /* Bold text for column titles */
+            margin-bottom: 10px; /* Space between title and checkbox list */
+        }
 
-      .conditional-input {
-          display: none; /* Hide by default */
-          margin-top: 20px; /* Add space above the text box */
-      }
+        .conditional-input {
+            display: none; /* Hide by default */
+            margin-top: 20px; /* Add space above the text box */
+        }
     </style>
     <script>
-       function toggleTextBox() {
+        let currentPage = 0; // Start on the piercer page
+
+        function toggleTextBox() {
             const checkboxes = document.querySelectorAll('input[name="services"]:checked');
             const textBox = document.getElementById('piercing-change-textbox');
 
@@ -72,7 +75,7 @@
 
             // Validation for the number of selected checkboxes
             const checkedCount = document.querySelectorAll('input[name="services"]:checked').length;
-            
+
             const allCheckboxes = document.querySelectorAll('input[name="services"]');
             allCheckboxes.forEach(checkbox => {
                 if (checkedCount >= 3) {
@@ -87,17 +90,16 @@
             });
         }
 
-    
         function updateServicesBasedOnPiercer() {
             const selectedPiercer = document.querySelector('input[name="piercer"]:checked');
-    
+
             // Define the visible services for Jennica
             const visibleForJennica = [
                 'Hidden Helix Piercing',
                 'Helix Piercing',
                 'Conch Piercing'
             ];
-    
+
             // Define the other services
             const otherServices = [
                 'Jewelry Change (One Change)',
@@ -119,12 +121,12 @@
                 'Jewelry Removal (General)',
                 'General Checkup'
             ];
-    
+
             const checkboxes = document.querySelectorAll('.services-container input[type="checkbox"]');
-    
+
             checkboxes.forEach(checkbox => {
                 const label = checkbox.nextElementSibling.innerText.trim();
-    
+
                 if (selectedPiercer && selectedPiercer.value === 'Jennica') {
                     // Show only specific services when Jennica is selected
                     checkbox.parentElement.style.display = (visibleForJennica.includes(label) || otherServices.includes(label)) ? 'flex' : 'none';
@@ -134,46 +136,66 @@
                 }
             });
         }
-    
+
         function validateServices(event) {
             const checkboxes = document.querySelectorAll('input[name="services"]:checked');
             const checkedCount = checkboxes.length;
-    
+
             // Require at least one service to be checked before submission
             if (checkedCount < 1) {
                 alert("Please select at least one service.");
                 event.preventDefault(); // Prevent form submission
                 return false;
             }
-    
+
             return true; // Allow form submission if valid
         }
-        
 
-    
+        function showPage(pageIndex) {
+            const forms = document.querySelectorAll('form');
+            forms.forEach((form, index) => {
+                form.style.display = (index === pageIndex) ? 'block' : 'none';
+            });
+        }
+
+        function nextPage() {
+            if (currentPage < 1) {
+                currentPage++;
+                showPage(currentPage);
+            }
+        }
+
+        function previousPage() {
+            if (currentPage > 0) {
+                currentPage--;
+                showPage(currentPage);
+            }
+        }
+
         window.onload = function() {
+            // Show the first page
+            showPage(currentPage);
+
             // Initialize services based on default piercer selection
             updateServicesBasedOnPiercer();
-    
+
             // Listen for changes on piercer selection
             const piercerRadios = document.querySelectorAll('input[name="piercer"]');
             piercerRadios.forEach(radio => {
                 radio.addEventListener('change', updateServicesBasedOnPiercer);
             });
-    
+
             // Listen for form submission to validate
-            const form = document.querySelector('form');
+            const form = document.querySelector('form:nth-of-type(2)'); // The services form
             form.addEventListener('submit', validateServices);
         };
     </script>
-    
-    
 </head>
 <body>
     <h1>Piercing Service Form</h1>
-    
-    <!-- Multiple choice question: Select a Piercer -->
-    <form action="/submit-form" method="POST">
+
+    <!-- First Page: Select a Piercer -->
+    <form action="#" method="POST">
         <fieldset>
             <legend>Select a Piercer</legend>
             <input type="radio" id="sairuh" name="piercer" value="Sairuh">
@@ -182,6 +204,8 @@
             <input type="radio" id="jennica" name="piercer" value="Jennica">
             <label for="jennica">Jennica</label><br>
         </fieldset>
+        <button type="button" onclick="nextPage()">Next</button>
+    </form>
 
         <!-- Checkbox question: Select Service(s) -->
         <fieldset>
